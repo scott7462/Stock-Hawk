@@ -1,4 +1,4 @@
-package com.sam_chordas.android.stockhawk.service;
+package com.sam_chordas.android.stockhawk.app.service;
 
 import android.content.ContentValues;
 import android.content.Context;
