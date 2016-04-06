@@ -1,6 +1,7 @@
 package com.sam_chordas.android.stockhawk.app.retofit;
 
 
+import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.App;
 import com.squareup.okhttp.HttpUrl;
@@ -62,6 +63,7 @@ public class RestClientPublic {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         client.interceptors().add(interceptor);
+
         client.networkInterceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -82,7 +84,7 @@ public class RestClientPublic {
 
             }
         });
-//        client.networkInterceptors().add(new StethoInterceptor());
+        client.networkInterceptors().add(new StethoInterceptor());
         return client;
     }
 

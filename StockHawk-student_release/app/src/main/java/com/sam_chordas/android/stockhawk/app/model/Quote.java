@@ -8,295 +8,349 @@ import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import net.simonvt.schematic.annotation.DataType;
-import net.simonvt.schematic.annotation.NotNull;
-
 /**
  * Created by scott7462 on 3/28/16.
  */
 @DatabaseTable
 public class Quote implements Parcelable {
 
-    @DataType(DataType.Type.TEXT)
-    @NotNull
-    public static final String SYMBOL = "symbol";
-    @DataType(DataType.Type.TEXT)
-    @NotNull
-    public static final String PERCENT_CHANGE = "percent_change";
-    @DataType(DataType.Type.TEXT)
-    @NotNull
-    public static final String CHANGE = "change";
-    @DataType(DataType.Type.TEXT)
-    @NotNull
-    public static final String BIDPRICE = "bid_price";
-    @DataType(DataType.Type.TEXT)
-    public static final String CREATED = "created";
-    @DataType(DataType.Type.INTEGER)
-    @NotNull
-    public static final String ISUP = "is_up";
-    @DataType(DataType.Type.INTEGER)
-    @NotNull
-    public static final String ISCURRENT = "is_current";
     private static final String FIELD_ID = "_id";
-
-
+    public static final String SYMBOL = "symbol";
     @DatabaseField(generatedId = true, columnName = FIELD_ID)
-    private String id;
+    private int id;
     @DatabaseField
     @SerializedName("symbol")
     @Expose
     private String symbol;
+    @DatabaseField
     @SerializedName("Ask")
     @Expose
-    private String Ask;
+    private String ask;
+    @DatabaseField
     @SerializedName("AverageDailyVolume")
     @Expose
-    private String AverageDailyVolume;
+    private String averageDailyVolume;
     @DatabaseField
     @SerializedName("Bid")
     @Expose
-    private String Bid;
+    private String bid;
+    @DatabaseField
     @SerializedName("AskRealtime")
     @Expose
-    private Object AskRealtime;
+    private String askRealtime;
+    @DatabaseField
     @SerializedName("BidRealtime")
     @Expose
-    private Object BidRealtime;
+    private String bidRealtime;
+    @DatabaseField
     @SerializedName("BookValue")
     @Expose
-    private String BookValue;
+    private String bookValue;
+    @DatabaseField
     @SerializedName("Change_PercentChange")
     @Expose
-    private String ChangePercentChange;
+    private String changePercentChange;
     @DatabaseField
     @SerializedName("Change")
     @Expose
-    private String Change;
+    private String change;
+    @DatabaseField
     @SerializedName("Commission")
     @Expose
-    private Object Commission;
+    private String commission;
+    @DatabaseField
     @SerializedName("Currency")
     @Expose
-    private String Currency;
+    private String currency;
+    @DatabaseField
     @SerializedName("ChangeRealtime")
     @Expose
-    private Object ChangeRealtime;
+    private String changeRealtime;
+    @DatabaseField
     @SerializedName("AfterHoursChangeRealtime")
     @Expose
-    private Object AfterHoursChangeRealtime;
+    private String afterHoursChangeRealtime;
+    @DatabaseField
     @SerializedName("DividendShare")
     @Expose
-    private Object DividendShare;
+    private String dividendShare;
+    @DatabaseField
     @SerializedName("LastTradeDate")
     @Expose
-    private String LastTradeDate;
+    private String lastTradeDate;
+    @DatabaseField
     @SerializedName("TradeDate")
     @Expose
-    private Object TradeDate;
+    private String tradeDate;
+    @DatabaseField
     @SerializedName("EarningsShare")
     @Expose
-    private String EarningsShare;
+    private String earningsShare;
+    @DatabaseField
     @SerializedName("ErrorIndicationreturnedforsymbolchangedinvalid")
     @Expose
-    private Object ErrorIndicationreturnedforsymbolchangedinvalid;
+    private String errorIndicationreturnedforsymbolchangedinvalid;
+    @DatabaseField
     @SerializedName("EPSEstimateCurrentYear")
     @Expose
     private String EPSEstimateCurrentYear;
+    @DatabaseField
     @SerializedName("EPSEstimateNextYear")
     @Expose
     private String EPSEstimateNextYear;
+    @DatabaseField
     @SerializedName("EPSEstimateNextQuarter")
     @Expose
     private String EPSEstimateNextQuarter;
+    @DatabaseField
     @SerializedName("DaysLow")
     @Expose
-    private String DaysLow;
+    private String daysLow;
+    @DatabaseField
     @SerializedName("DaysHigh")
     @Expose
-    private String DaysHigh;
+    private String daysHigh;
+    @DatabaseField
     @SerializedName("YearLow")
     @Expose
-    private String YearLow;
+    private String yearLow;
+    @DatabaseField
     @SerializedName("YearHigh")
     @Expose
-    private String YearHigh;
+    private String yearHigh;
+    @DatabaseField
     @SerializedName("HoldingsGainPercent")
     @Expose
-    private Object HoldingsGainPercent;
+    private String holdingsGainPercent;
+    @DatabaseField
     @SerializedName("AnnualizedGain")
     @Expose
-    private Object AnnualizedGain;
+    private String annualizedGain;
+    @DatabaseField
     @SerializedName("HoldingsGain")
     @Expose
-    private Object HoldingsGain;
+    private String holdingsGain;
+    @DatabaseField
     @SerializedName("HoldingsGainPercentRealtime")
     @Expose
-    private Object HoldingsGainPercentRealtime;
+    private String holdingsGainPercentRealtime;
+    @DatabaseField
     @SerializedName("HoldingsGainRealtime")
     @Expose
-    private Object HoldingsGainRealtime;
+    private String holdingsGainRealtime;
+    @DatabaseField
     @SerializedName("MoreInfo")
     @Expose
-    private Object MoreInfo;
+    private String moreInfo;
+    @DatabaseField
     @SerializedName("OrderBookRealtime")
     @Expose
-    private Object OrderBookRealtime;
+    private String orderBookRealtime;
+    @DatabaseField
     @SerializedName("MarketCapitalization")
     @Expose
-    private String MarketCapitalization;
+    private String marketCapitalization;
+    @DatabaseField
     @SerializedName("MarketCapRealtime")
     @Expose
-    private Object MarketCapRealtime;
+    private String marketCapRealtime;
+    @DatabaseField
     @SerializedName("EBITDA")
     @Expose
     private String EBITDA;
+    @DatabaseField
     @SerializedName("ChangeFromYearLow")
     @Expose
-    private String ChangeFromYearLow;
+    private String changeFromYearLow;
+    @DatabaseField
     @SerializedName("PercentChangeFromYearLow")
     @Expose
-    private String PercentChangeFromYearLow;
+    private String percentChangeFromYearLow;
+    @DatabaseField
     @SerializedName("LastTradeRealtimeWithTime")
     @Expose
-    private Object LastTradeRealtimeWithTime;
+    private String lastTradeRealtimeWithTime;
+    @DatabaseField
     @SerializedName("ChangePercentRealtime")
     @Expose
-    private Object ChangePercentRealtime;
+    private String changePercentRealtime;
+    @DatabaseField
     @SerializedName("ChangeFromYearHigh")
     @Expose
-    private String ChangeFromYearHigh;
+    private String changeFromYearHigh;
+    @DatabaseField
     @SerializedName("PercebtChangeFromYearHigh")
     @Expose
-    private String PercebtChangeFromYearHigh;
+    private String percebtChangeFromYearHigh;
+    @DatabaseField
     @SerializedName("LastTradeWithTime")
     @Expose
-    private String LastTradeWithTime;
+    private String lastTradeWithTime;
+    @DatabaseField
     @SerializedName("LastTradePriceOnly")
     @Expose
-    private String LastTradePriceOnly;
+    private String lastTradePriceOnly;
+    @DatabaseField
     @SerializedName("HighLimit")
     @Expose
-    private Object HighLimit;
+    private String highLimit;
+    @DatabaseField
     @SerializedName("LowLimit")
     @Expose
-    private Object LowLimit;
+    private String lowLimit;
+    @DatabaseField
     @SerializedName("DaysRange")
     @Expose
-    private String DaysRange;
+    private String daysRange;
+    @DatabaseField
     @SerializedName("DaysRangeRealtime")
     @Expose
-    private Object DaysRangeRealtime;
+    private String daysRangeRealtime;
+    @DatabaseField
     @SerializedName("FiftydayMovingAverage")
     @Expose
-    private String FiftydayMovingAverage;
+    private String fiftydayMovingAverage;
+    @DatabaseField
     @SerializedName("TwoHundreddayMovingAverage")
     @Expose
-    private String TwoHundreddayMovingAverage;
+    private String twoHundreddayMovingAverage;
+    @DatabaseField
     @SerializedName("ChangeFromTwoHundreddayMovingAverage")
     @Expose
-    private String ChangeFromTwoHundreddayMovingAverage;
+    private String changeFromTwoHundreddayMovingAverage;
+    @DatabaseField
     @SerializedName("PercentChangeFromTwoHundreddayMovingAverage")
     @Expose
-    private String PercentChangeFromTwoHundreddayMovingAverage;
+    private String percentChangeFromTwoHundreddayMovingAverage;
+    @DatabaseField
     @SerializedName("ChangeFromFiftydayMovingAverage")
     @Expose
-    private String ChangeFromFiftydayMovingAverage;
+    private String changeFromFiftydayMovingAverage;
+    @DatabaseField
     @SerializedName("PercentChangeFromFiftydayMovingAverage")
     @Expose
-    private String PercentChangeFromFiftydayMovingAverage;
+    private String percentChangeFromFiftydayMovingAverage;
+    @DatabaseField
     @SerializedName("Name")
     @Expose
-    private String Name;
+    private String name;
+    @DatabaseField
     @SerializedName("Notes")
     @Expose
-    private Object Notes;
+    private String notes;
+    @DatabaseField
     @SerializedName("Open")
     @Expose
-    private String Open;
+    private String open;
+    @DatabaseField
     @SerializedName("PreviousClose")
     @Expose
-    private String PreviousClose;
+    private String previousClose;
+    @DatabaseField
     @SerializedName("PricePaid")
     @Expose
-    private Object PricePaid;
+    private String pricePaid;
+    @DatabaseField
     @SerializedName("ChangeinPercent")
     @Expose
-    private String ChangeinPercent;
+    private String changeinPercent;
+    @DatabaseField
     @SerializedName("PriceSales")
     @Expose
-    private String PriceSales;
+    private String priceSales;
+    @DatabaseField
     @SerializedName("PriceBook")
     @Expose
-    private String PriceBook;
+    private String priceBook;
+    @DatabaseField
     @SerializedName("ExDividendDate")
     @Expose
-    private Object ExDividendDate;
+    private String exDividendDate;
     @SerializedName("PERatio")
     @Expose
-    private Object PERatio;
+    private String pERatio;
+    @DatabaseField
     @SerializedName("DividendPayDate")
     @Expose
-    private Object DividendPayDate;
+    private String dividendPayDate;
+    @DatabaseField
     @SerializedName("PERatioRealtime")
     @Expose
-    private Object PERatioRealtime;
+    private String pERatioRealtime;
+    @DatabaseField
     @SerializedName("PEGRatio")
     @Expose
-    private String PEGRatio;
+    private String pEGRatio;
+    @DatabaseField
     @SerializedName("PriceEPSEstimateCurrentYear")
     @Expose
-    private String PriceEPSEstimateCurrentYear;
+    private String priceEPSEstimateCurrentYear;
+    @DatabaseField
     @SerializedName("PriceEPSEstimateNextYear")
     @Expose
-    private String PriceEPSEstimateNextYear;
+    private String priceEPSEstimateNextYear;
+    @DatabaseField
     @SerializedName("SharesOwned")
     @Expose
-    private Object SharesOwned;
+    private String sharesOwned;
+    @DatabaseField
     @SerializedName("ShortRatio")
     @Expose
-    private String ShortRatio;
+    private String shortRatio;
+    @DatabaseField
     @SerializedName("LastTradeTime")
     @Expose
-    private String LastTradeTime;
+    private String lastTradeTime;
+    @DatabaseField
     @SerializedName("TickerTrend")
     @Expose
-    private Object TickerTrend;
+    private String tickerTrend;
+    @DatabaseField
     @SerializedName("OneyrTargetPrice")
     @Expose
-    private String OneyrTargetPrice;
+    private String oneyrTargetPrice;
+    @DatabaseField
     @SerializedName("Volume")
     @Expose
-    private String Volume;
+    private String volume;
+    @DatabaseField
     @SerializedName("HoldingsValue")
     @Expose
-    private Object HoldingsValue;
+    private String holdingsValue;
+    @DatabaseField
     @SerializedName("HoldingsValueRealtime")
     @Expose
-    private Object HoldingsValueRealtime;
+    private String holdingsValueRealtime;
+    @DatabaseField
     @SerializedName("YearRange")
     @Expose
-    private String YearRange;
+    private String yearRange;
+    @DatabaseField
     @SerializedName("DaysValueChange")
     @Expose
-    private Object DaysValueChange;
+    private String daysValueChange;
+    @DatabaseField
     @SerializedName("DaysValueChangeRealtime")
     @Expose
-    private Object DaysValueChangeRealtime;
+    private String daysValueChangeRealtime;
+    @DatabaseField
     @SerializedName("StockExchange")
     @Expose
-    private String StockExchange;
+    private String stockExchange;
+    @DatabaseField
     @SerializedName("DividendYield")
     @Expose
-    private Object DividendYield;
+    private String dividendYield;
+    @DatabaseField
     @SerializedName("PercentChange")
     @Expose
-    private String PercentChange;
+    private String percentChange;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -315,1223 +369,659 @@ public class Quote implements Parcelable {
     }
 
     /**
-     * @return The Ask
+     * @return The ask
      */
     public String getAsk() {
-        return Ask;
+        return ask;
     }
 
     /**
-     * @param Ask The Ask
+     * @param Ask The ask
      */
     public void setAsk(String Ask) {
-        this.Ask = Ask;
+        this.ask = Ask;
     }
 
-    /**
-     * @return The AverageDailyVolume
-     */
     public String getAverageDailyVolume() {
-        return AverageDailyVolume;
+        return averageDailyVolume;
     }
 
-    /**
-     * @param AverageDailyVolume The AverageDailyVolume
-     */
-    public void setAverageDailyVolume(String AverageDailyVolume) {
-        this.AverageDailyVolume = AverageDailyVolume;
+    public void setAverageDailyVolume(String averageDailyVolume) {
+        this.averageDailyVolume = averageDailyVolume;
     }
 
-    /**
-     * @return The Bid
-     */
     public String getBid() {
-        return Bid;
+        return bid;
     }
 
-    /**
-     * @param Bid The Bid
-     */
-    public void setBid(String Bid) {
-        this.Bid = Bid;
+    public void setBid(String bid) {
+        this.bid = bid;
     }
 
-    /**
-     * @return The AskRealtime
-     */
-    public Object getAskRealtime() {
-        return AskRealtime;
+    public String getAskRealtime() {
+        return askRealtime;
     }
 
-    /**
-     * @param AskRealtime The AskRealtime
-     */
-    public void setAskRealtime(Object AskRealtime) {
-        this.AskRealtime = AskRealtime;
+    public void setAskRealtime(String askRealtime) {
+        this.askRealtime = askRealtime;
     }
 
-    /**
-     * @return The BidRealtime
-     */
-    public Object getBidRealtime() {
-        return BidRealtime;
+    public String getBidRealtime() {
+        return bidRealtime;
     }
 
-    /**
-     * @param BidRealtime The BidRealtime
-     */
-    public void setBidRealtime(Object BidRealtime) {
-        this.BidRealtime = BidRealtime;
+    public void setBidRealtime(String bidRealtime) {
+        this.bidRealtime = bidRealtime;
     }
 
-    /**
-     * @return The BookValue
-     */
     public String getBookValue() {
-        return BookValue;
+        return bookValue;
     }
 
-    /**
-     * @param BookValue The BookValue
-     */
-    public void setBookValue(String BookValue) {
-        this.BookValue = BookValue;
+    public void setBookValue(String bookValue) {
+        this.bookValue = bookValue;
     }
 
-    /**
-     * @return The ChangePercentChange
-     */
     public String getChangePercentChange() {
-        return ChangePercentChange;
+        return changePercentChange;
     }
 
-    /**
-     * @param ChangePercentChange The Change_PercentChange
-     */
-    public void setChangePercentChange(String ChangePercentChange) {
-        this.ChangePercentChange = ChangePercentChange;
+    public void setChangePercentChange(String changePercentChange) {
+        this.changePercentChange = changePercentChange;
     }
 
-    /**
-     * @return The Change
-     */
     public String getChange() {
-        return Change;
+        return change;
     }
 
-    /**
-     * @param Change The Change
-     */
-    public void setChange(String Change) {
-        this.Change = Change;
+    public void setChange(String change) {
+        this.change = change;
     }
 
-    /**
-     * @return The Commission
-     */
-    public Object getCommission() {
-        return Commission;
+    public String getCommission() {
+        return commission;
     }
 
-    /**
-     * @param Commission The Commission
-     */
-    public void setCommission(Object Commission) {
-        this.Commission = Commission;
+    public void setCommission(String commission) {
+        this.commission = commission;
     }
 
-    /**
-     * @return The Currency
-     */
     public String getCurrency() {
-        return Currency;
+        return currency;
     }
 
-    /**
-     * @param Currency The Currency
-     */
-    public void setCurrency(String Currency) {
-        this.Currency = Currency;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
-    /**
-     * @return The ChangeRealtime
-     */
-    public Object getChangeRealtime() {
-        return ChangeRealtime;
+    public String getChangeRealtime() {
+        return changeRealtime;
     }
 
-    /**
-     * @param ChangeRealtime The ChangeRealtime
-     */
-    public void setChangeRealtime(Object ChangeRealtime) {
-        this.ChangeRealtime = ChangeRealtime;
+    public void setChangeRealtime(String changeRealtime) {
+        this.changeRealtime = changeRealtime;
     }
 
-    /**
-     * @return The AfterHoursChangeRealtime
-     */
-    public Object getAfterHoursChangeRealtime() {
-        return AfterHoursChangeRealtime;
+    public String getAfterHoursChangeRealtime() {
+        return afterHoursChangeRealtime;
     }
 
-    /**
-     * @param AfterHoursChangeRealtime The AfterHoursChangeRealtime
-     */
-    public void setAfterHoursChangeRealtime(Object AfterHoursChangeRealtime) {
-        this.AfterHoursChangeRealtime = AfterHoursChangeRealtime;
+    public void setAfterHoursChangeRealtime(String afterHoursChangeRealtime) {
+        this.afterHoursChangeRealtime = afterHoursChangeRealtime;
     }
 
-    /**
-     * @return The DividendShare
-     */
-    public Object getDividendShare() {
-        return DividendShare;
+    public String getDividendShare() {
+        return dividendShare;
     }
 
-    /**
-     * @param DividendShare The DividendShare
-     */
-    public void setDividendShare(Object DividendShare) {
-        this.DividendShare = DividendShare;
+    public void setDividendShare(String dividendShare) {
+        this.dividendShare = dividendShare;
     }
 
-    /**
-     * @return The LastTradeDate
-     */
     public String getLastTradeDate() {
-        return LastTradeDate;
+        return lastTradeDate;
     }
 
-    /**
-     * @param LastTradeDate The LastTradeDate
-     */
-    public void setLastTradeDate(String LastTradeDate) {
-        this.LastTradeDate = LastTradeDate;
+    public void setLastTradeDate(String lastTradeDate) {
+        this.lastTradeDate = lastTradeDate;
     }
 
-    /**
-     * @return The TradeDate
-     */
-    public Object getTradeDate() {
-        return TradeDate;
+    public String getTradeDate() {
+        return tradeDate;
     }
 
-    /**
-     * @param TradeDate The TradeDate
-     */
-    public void setTradeDate(Object TradeDate) {
-        this.TradeDate = TradeDate;
+    public void setTradeDate(String tradeDate) {
+        this.tradeDate = tradeDate;
     }
 
-    /**
-     * @return The EarningsShare
-     */
     public String getEarningsShare() {
-        return EarningsShare;
+        return earningsShare;
     }
 
-    /**
-     * @param EarningsShare The EarningsShare
-     */
-    public void setEarningsShare(String EarningsShare) {
-        this.EarningsShare = EarningsShare;
+    public void setEarningsShare(String earningsShare) {
+        this.earningsShare = earningsShare;
     }
 
-    /**
-     * @return The ErrorIndicationreturnedforsymbolchangedinvalid
-     */
-    public Object getErrorIndicationreturnedforsymbolchangedinvalid() {
-        return ErrorIndicationreturnedforsymbolchangedinvalid;
+    public String getErrorIndicationreturnedforsymbolchangedinvalid() {
+        return errorIndicationreturnedforsymbolchangedinvalid;
     }
 
-    /**
-     * @param ErrorIndicationreturnedforsymbolchangedinvalid The ErrorIndicationreturnedforsymbolchangedinvalid
-     */
-    public void setErrorIndicationreturnedforsymbolchangedinvalid(Object ErrorIndicationreturnedforsymbolchangedinvalid) {
-        this.ErrorIndicationreturnedforsymbolchangedinvalid = ErrorIndicationreturnedforsymbolchangedinvalid;
+    public void setErrorIndicationreturnedforsymbolchangedinvalid(String errorIndicationreturnedforsymbolchangedinvalid) {
+        this.errorIndicationreturnedforsymbolchangedinvalid = errorIndicationreturnedforsymbolchangedinvalid;
     }
 
-    /**
-     * @return The EPSEstimateCurrentYear
-     */
     public String getEPSEstimateCurrentYear() {
         return EPSEstimateCurrentYear;
     }
 
-    /**
-     * @param EPSEstimateCurrentYear The EPSEstimateCurrentYear
-     */
     public void setEPSEstimateCurrentYear(String EPSEstimateCurrentYear) {
         this.EPSEstimateCurrentYear = EPSEstimateCurrentYear;
     }
 
-    /**
-     * @return The EPSEstimateNextYear
-     */
     public String getEPSEstimateNextYear() {
         return EPSEstimateNextYear;
     }
 
-    /**
-     * @param EPSEstimateNextYear The EPSEstimateNextYear
-     */
     public void setEPSEstimateNextYear(String EPSEstimateNextYear) {
         this.EPSEstimateNextYear = EPSEstimateNextYear;
     }
 
-    /**
-     * @return The EPSEstimateNextQuarter
-     */
     public String getEPSEstimateNextQuarter() {
         return EPSEstimateNextQuarter;
     }
 
-    /**
-     * @param EPSEstimateNextQuarter The EPSEstimateNextQuarter
-     */
     public void setEPSEstimateNextQuarter(String EPSEstimateNextQuarter) {
         this.EPSEstimateNextQuarter = EPSEstimateNextQuarter;
     }
 
-    /**
-     * @return The DaysLow
-     */
     public String getDaysLow() {
-        return DaysLow;
+        return daysLow;
     }
 
-    /**
-     * @param DaysLow The DaysLow
-     */
-    public void setDaysLow(String DaysLow) {
-        this.DaysLow = DaysLow;
+    public void setDaysLow(String daysLow) {
+        this.daysLow = daysLow;
     }
 
-    /**
-     * @return The DaysHigh
-     */
     public String getDaysHigh() {
-        return DaysHigh;
+        return daysHigh;
     }
 
-    /**
-     * @param DaysHigh The DaysHigh
-     */
-    public void setDaysHigh(String DaysHigh) {
-        this.DaysHigh = DaysHigh;
+    public void setDaysHigh(String daysHigh) {
+        this.daysHigh = daysHigh;
     }
 
-    /**
-     * @return The YearLow
-     */
     public String getYearLow() {
-        return YearLow;
+        return yearLow;
     }
 
-    /**
-     * @param YearLow The YearLow
-     */
-    public void setYearLow(String YearLow) {
-        this.YearLow = YearLow;
+    public void setYearLow(String yearLow) {
+        this.yearLow = yearLow;
     }
 
-    /**
-     * @return The YearHigh
-     */
     public String getYearHigh() {
-        return YearHigh;
+        return yearHigh;
     }
 
-    /**
-     * @param YearHigh The YearHigh
-     */
-    public void setYearHigh(String YearHigh) {
-        this.YearHigh = YearHigh;
+    public void setYearHigh(String yearHigh) {
+        this.yearHigh = yearHigh;
     }
 
-    /**
-     * @return The HoldingsGainPercent
-     */
-    public Object getHoldingsGainPercent() {
-        return HoldingsGainPercent;
+    public String getHoldingsGainPercent() {
+        return holdingsGainPercent;
     }
 
-    /**
-     * @param HoldingsGainPercent The HoldingsGainPercent
-     */
-    public void setHoldingsGainPercent(Object HoldingsGainPercent) {
-        this.HoldingsGainPercent = HoldingsGainPercent;
+    public void setHoldingsGainPercent(String holdingsGainPercent) {
+        this.holdingsGainPercent = holdingsGainPercent;
     }
 
-    /**
-     * @return The AnnualizedGain
-     */
-    public Object getAnnualizedGain() {
-        return AnnualizedGain;
+    public String getAnnualizedGain() {
+        return annualizedGain;
     }
 
-    /**
-     * @param AnnualizedGain The AnnualizedGain
-     */
-    public void setAnnualizedGain(Object AnnualizedGain) {
-        this.AnnualizedGain = AnnualizedGain;
+    public void setAnnualizedGain(String annualizedGain) {
+        this.annualizedGain = annualizedGain;
     }
 
-    /**
-     * @return The HoldingsGain
-     */
-    public Object getHoldingsGain() {
-        return HoldingsGain;
+    public String getHoldingsGain() {
+        return holdingsGain;
     }
 
-    /**
-     * @param HoldingsGain The HoldingsGain
-     */
-    public void setHoldingsGain(Object HoldingsGain) {
-        this.HoldingsGain = HoldingsGain;
+    public void setHoldingsGain(String holdingsGain) {
+        this.holdingsGain = holdingsGain;
     }
 
-    /**
-     * @return The HoldingsGainPercentRealtime
-     */
-    public Object getHoldingsGainPercentRealtime() {
-        return HoldingsGainPercentRealtime;
+    public String getHoldingsGainPercentRealtime() {
+        return holdingsGainPercentRealtime;
     }
 
-    /**
-     * @param HoldingsGainPercentRealtime The HoldingsGainPercentRealtime
-     */
-    public void setHoldingsGainPercentRealtime(Object HoldingsGainPercentRealtime) {
-        this.HoldingsGainPercentRealtime = HoldingsGainPercentRealtime;
+    public void setHoldingsGainPercentRealtime(String holdingsGainPercentRealtime) {
+        this.holdingsGainPercentRealtime = holdingsGainPercentRealtime;
     }
 
-    /**
-     * @return The HoldingsGainRealtime
-     */
-    public Object getHoldingsGainRealtime() {
-        return HoldingsGainRealtime;
+    public String getHoldingsGainRealtime() {
+        return holdingsGainRealtime;
     }
 
-    /**
-     * @param HoldingsGainRealtime The HoldingsGainRealtime
-     */
-    public void setHoldingsGainRealtime(Object HoldingsGainRealtime) {
-        this.HoldingsGainRealtime = HoldingsGainRealtime;
+    public void setHoldingsGainRealtime(String holdingsGainRealtime) {
+        this.holdingsGainRealtime = holdingsGainRealtime;
     }
 
-    /**
-     * @return The MoreInfo
-     */
-    public Object getMoreInfo() {
-        return MoreInfo;
+    public String getMoreInfo() {
+        return moreInfo;
     }
 
-    /**
-     * @param MoreInfo The MoreInfo
-     */
-    public void setMoreInfo(Object MoreInfo) {
-        this.MoreInfo = MoreInfo;
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
     }
 
-    /**
-     * @return The OrderBookRealtime
-     */
-    public Object getOrderBookRealtime() {
-        return OrderBookRealtime;
+    public String getOrderBookRealtime() {
+        return orderBookRealtime;
     }
 
-    /**
-     * @param OrderBookRealtime The OrderBookRealtime
-     */
-    public void setOrderBookRealtime(Object OrderBookRealtime) {
-        this.OrderBookRealtime = OrderBookRealtime;
+    public void setOrderBookRealtime(String orderBookRealtime) {
+        this.orderBookRealtime = orderBookRealtime;
     }
 
-    /**
-     * @return The MarketCapitalization
-     */
     public String getMarketCapitalization() {
-        return MarketCapitalization;
+        return marketCapitalization;
     }
 
-    /**
-     * @param MarketCapitalization The MarketCapitalization
-     */
-    public void setMarketCapitalization(String MarketCapitalization) {
-        this.MarketCapitalization = MarketCapitalization;
+    public void setMarketCapitalization(String marketCapitalization) {
+        this.marketCapitalization = marketCapitalization;
     }
 
-    /**
-     * @return The MarketCapRealtime
-     */
-    public Object getMarketCapRealtime() {
-        return MarketCapRealtime;
+    public String getMarketCapRealtime() {
+        return marketCapRealtime;
     }
 
-    /**
-     * @param MarketCapRealtime The MarketCapRealtime
-     */
-    public void setMarketCapRealtime(Object MarketCapRealtime) {
-        this.MarketCapRealtime = MarketCapRealtime;
+    public void setMarketCapRealtime(String marketCapRealtime) {
+        this.marketCapRealtime = marketCapRealtime;
     }
 
-    /**
-     * @return The EBITDA
-     */
     public String getEBITDA() {
         return EBITDA;
     }
 
-    /**
-     * @param EBITDA The EBITDA
-     */
     public void setEBITDA(String EBITDA) {
         this.EBITDA = EBITDA;
     }
 
-    /**
-     * @return The ChangeFromYearLow
-     */
     public String getChangeFromYearLow() {
-        return ChangeFromYearLow;
+        return changeFromYearLow;
     }
 
-    /**
-     * @param ChangeFromYearLow The ChangeFromYearLow
-     */
-    public void setChangeFromYearLow(String ChangeFromYearLow) {
-        this.ChangeFromYearLow = ChangeFromYearLow;
+    public void setChangeFromYearLow(String changeFromYearLow) {
+        this.changeFromYearLow = changeFromYearLow;
     }
 
-    /**
-     * @return The PercentChangeFromYearLow
-     */
     public String getPercentChangeFromYearLow() {
-        return PercentChangeFromYearLow;
+        return percentChangeFromYearLow;
     }
 
-    /**
-     * @param PercentChangeFromYearLow The PercentChangeFromYearLow
-     */
-    public void setPercentChangeFromYearLow(String PercentChangeFromYearLow) {
-        this.PercentChangeFromYearLow = PercentChangeFromYearLow;
+    public void setPercentChangeFromYearLow(String percentChangeFromYearLow) {
+        this.percentChangeFromYearLow = percentChangeFromYearLow;
     }
 
-    /**
-     * @return The LastTradeRealtimeWithTime
-     */
-    public Object getLastTradeRealtimeWithTime() {
-        return LastTradeRealtimeWithTime;
+    public String getLastTradeRealtimeWithTime() {
+        return lastTradeRealtimeWithTime;
     }
 
-    /**
-     * @param LastTradeRealtimeWithTime The LastTradeRealtimeWithTime
-     */
-    public void setLastTradeRealtimeWithTime(Object LastTradeRealtimeWithTime) {
-        this.LastTradeRealtimeWithTime = LastTradeRealtimeWithTime;
+    public void setLastTradeRealtimeWithTime(String lastTradeRealtimeWithTime) {
+        this.lastTradeRealtimeWithTime = lastTradeRealtimeWithTime;
     }
 
-    /**
-     * @return The ChangePercentRealtime
-     */
-    public Object getChangePercentRealtime() {
-        return ChangePercentRealtime;
+    public String getChangePercentRealtime() {
+        return changePercentRealtime;
     }
 
-    /**
-     * @param ChangePercentRealtime The ChangePercentRealtime
-     */
-    public void setChangePercentRealtime(Object ChangePercentRealtime) {
-        this.ChangePercentRealtime = ChangePercentRealtime;
+    public void setChangePercentRealtime(String changePercentRealtime) {
+        this.changePercentRealtime = changePercentRealtime;
     }
 
-    /**
-     * @return The ChangeFromYearHigh
-     */
     public String getChangeFromYearHigh() {
-        return ChangeFromYearHigh;
+        return changeFromYearHigh;
     }
 
-    /**
-     * @param ChangeFromYearHigh The ChangeFromYearHigh
-     */
-    public void setChangeFromYearHigh(String ChangeFromYearHigh) {
-        this.ChangeFromYearHigh = ChangeFromYearHigh;
+    public void setChangeFromYearHigh(String changeFromYearHigh) {
+        this.changeFromYearHigh = changeFromYearHigh;
     }
 
-    /**
-     * @return The PercebtChangeFromYearHigh
-     */
     public String getPercebtChangeFromYearHigh() {
-        return PercebtChangeFromYearHigh;
+        return percebtChangeFromYearHigh;
     }
 
-    /**
-     * @param PercebtChangeFromYearHigh The PercebtChangeFromYearHigh
-     */
-    public void setPercebtChangeFromYearHigh(String PercebtChangeFromYearHigh) {
-        this.PercebtChangeFromYearHigh = PercebtChangeFromYearHigh;
+    public void setPercebtChangeFromYearHigh(String percebtChangeFromYearHigh) {
+        this.percebtChangeFromYearHigh = percebtChangeFromYearHigh;
     }
 
-    /**
-     * @return The LastTradeWithTime
-     */
     public String getLastTradeWithTime() {
-        return LastTradeWithTime;
+        return lastTradeWithTime;
     }
 
-    /**
-     * @param LastTradeWithTime The LastTradeWithTime
-     */
-    public void setLastTradeWithTime(String LastTradeWithTime) {
-        this.LastTradeWithTime = LastTradeWithTime;
+    public void setLastTradeWithTime(String lastTradeWithTime) {
+        this.lastTradeWithTime = lastTradeWithTime;
     }
 
-    /**
-     * @return The LastTradePriceOnly
-     */
     public String getLastTradePriceOnly() {
-        return LastTradePriceOnly;
+        return lastTradePriceOnly;
     }
 
-    /**
-     * @param LastTradePriceOnly The LastTradePriceOnly
-     */
-    public void setLastTradePriceOnly(String LastTradePriceOnly) {
-        this.LastTradePriceOnly = LastTradePriceOnly;
+    public void setLastTradePriceOnly(String lastTradePriceOnly) {
+        this.lastTradePriceOnly = lastTradePriceOnly;
     }
 
-    /**
-     * @return The HighLimit
-     */
-    public Object getHighLimit() {
-        return HighLimit;
+    public String getHighLimit() {
+        return highLimit;
     }
 
-    /**
-     * @param HighLimit The HighLimit
-     */
-    public void setHighLimit(Object HighLimit) {
-        this.HighLimit = HighLimit;
+    public void setHighLimit(String highLimit) {
+        this.highLimit = highLimit;
     }
 
-    /**
-     * @return The LowLimit
-     */
-    public Object getLowLimit() {
-        return LowLimit;
+    public String getLowLimit() {
+        return lowLimit;
     }
 
-    /**
-     * @param LowLimit The LowLimit
-     */
-    public void setLowLimit(Object LowLimit) {
-        this.LowLimit = LowLimit;
+    public void setLowLimit(String lowLimit) {
+        this.lowLimit = lowLimit;
     }
 
-    /**
-     * @return The DaysRange
-     */
     public String getDaysRange() {
-        return DaysRange;
+        return daysRange;
     }
 
-    /**
-     * @param DaysRange The DaysRange
-     */
-    public void setDaysRange(String DaysRange) {
-        this.DaysRange = DaysRange;
+    public void setDaysRange(String daysRange) {
+        this.daysRange = daysRange;
     }
 
-    /**
-     * @return The DaysRangeRealtime
-     */
-    public Object getDaysRangeRealtime() {
-        return DaysRangeRealtime;
+    public String getDaysRangeRealtime() {
+        return daysRangeRealtime;
     }
 
-    /**
-     * @param DaysRangeRealtime The DaysRangeRealtime
-     */
-    public void setDaysRangeRealtime(Object DaysRangeRealtime) {
-        this.DaysRangeRealtime = DaysRangeRealtime;
+    public void setDaysRangeRealtime(String daysRangeRealtime) {
+        this.daysRangeRealtime = daysRangeRealtime;
     }
 
-    /**
-     * @return The FiftydayMovingAverage
-     */
     public String getFiftydayMovingAverage() {
-        return FiftydayMovingAverage;
+        return fiftydayMovingAverage;
     }
 
-    /**
-     * @param FiftydayMovingAverage The FiftydayMovingAverage
-     */
-    public void setFiftydayMovingAverage(String FiftydayMovingAverage) {
-        this.FiftydayMovingAverage = FiftydayMovingAverage;
+    public void setFiftydayMovingAverage(String fiftydayMovingAverage) {
+        this.fiftydayMovingAverage = fiftydayMovingAverage;
     }
 
-    /**
-     * @return The TwoHundreddayMovingAverage
-     */
     public String getTwoHundreddayMovingAverage() {
-        return TwoHundreddayMovingAverage;
+        return twoHundreddayMovingAverage;
     }
 
-    /**
-     * @param TwoHundreddayMovingAverage The TwoHundreddayMovingAverage
-     */
-    public void setTwoHundreddayMovingAverage(String TwoHundreddayMovingAverage) {
-        this.TwoHundreddayMovingAverage = TwoHundreddayMovingAverage;
+    public void setTwoHundreddayMovingAverage(String twoHundreddayMovingAverage) {
+        this.twoHundreddayMovingAverage = twoHundreddayMovingAverage;
     }
 
-    /**
-     * @return The ChangeFromTwoHundreddayMovingAverage
-     */
     public String getChangeFromTwoHundreddayMovingAverage() {
-        return ChangeFromTwoHundreddayMovingAverage;
+        return changeFromTwoHundreddayMovingAverage;
     }
 
-    /**
-     * @param ChangeFromTwoHundreddayMovingAverage The ChangeFromTwoHundreddayMovingAverage
-     */
-    public void setChangeFromTwoHundreddayMovingAverage(String ChangeFromTwoHundreddayMovingAverage) {
-        this.ChangeFromTwoHundreddayMovingAverage = ChangeFromTwoHundreddayMovingAverage;
+    public void setChangeFromTwoHundreddayMovingAverage(String changeFromTwoHundreddayMovingAverage) {
+        this.changeFromTwoHundreddayMovingAverage = changeFromTwoHundreddayMovingAverage;
     }
 
-    /**
-     * @return The PercentChangeFromTwoHundreddayMovingAverage
-     */
     public String getPercentChangeFromTwoHundreddayMovingAverage() {
-        return PercentChangeFromTwoHundreddayMovingAverage;
+        return percentChangeFromTwoHundreddayMovingAverage;
     }
 
-    /**
-     * @param PercentChangeFromTwoHundreddayMovingAverage The PercentChangeFromTwoHundreddayMovingAverage
-     */
-    public void setPercentChangeFromTwoHundreddayMovingAverage(String PercentChangeFromTwoHundreddayMovingAverage) {
-        this.PercentChangeFromTwoHundreddayMovingAverage = PercentChangeFromTwoHundreddayMovingAverage;
+    public void setPercentChangeFromTwoHundreddayMovingAverage(String percentChangeFromTwoHundreddayMovingAverage) {
+        this.percentChangeFromTwoHundreddayMovingAverage = percentChangeFromTwoHundreddayMovingAverage;
     }
 
-    /**
-     * @return The ChangeFromFiftydayMovingAverage
-     */
     public String getChangeFromFiftydayMovingAverage() {
-        return ChangeFromFiftydayMovingAverage;
+        return changeFromFiftydayMovingAverage;
     }
 
-    /**
-     * @param ChangeFromFiftydayMovingAverage The ChangeFromFiftydayMovingAverage
-     */
-    public void setChangeFromFiftydayMovingAverage(String ChangeFromFiftydayMovingAverage) {
-        this.ChangeFromFiftydayMovingAverage = ChangeFromFiftydayMovingAverage;
+    public void setChangeFromFiftydayMovingAverage(String changeFromFiftydayMovingAverage) {
+        this.changeFromFiftydayMovingAverage = changeFromFiftydayMovingAverage;
     }
 
-    /**
-     * @return The PercentChangeFromFiftydayMovingAverage
-     */
     public String getPercentChangeFromFiftydayMovingAverage() {
-        return PercentChangeFromFiftydayMovingAverage;
+        return percentChangeFromFiftydayMovingAverage;
     }
 
-    /**
-     * @param PercentChangeFromFiftydayMovingAverage The PercentChangeFromFiftydayMovingAverage
-     */
-    public void setPercentChangeFromFiftydayMovingAverage(String PercentChangeFromFiftydayMovingAverage) {
-        this.PercentChangeFromFiftydayMovingAverage = PercentChangeFromFiftydayMovingAverage;
+    public void setPercentChangeFromFiftydayMovingAverage(String percentChangeFromFiftydayMovingAverage) {
+        this.percentChangeFromFiftydayMovingAverage = percentChangeFromFiftydayMovingAverage;
     }
 
-    /**
-     * @return The Name
-     */
     public String getName() {
-        return Name;
+        return name;
     }
 
-    /**
-     * @param Name The Name
-     */
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * @return The Notes
-     */
-    public Object getNotes() {
-        return Notes;
+    public String getNotes() {
+        return notes;
     }
 
-    /**
-     * @param Notes The Notes
-     */
-    public void setNotes(Object Notes) {
-        this.Notes = Notes;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    /**
-     * @return The Open
-     */
     public String getOpen() {
-        return Open;
+        return open;
     }
 
-    /**
-     * @param Open The Open
-     */
-    public void setOpen(String Open) {
-        this.Open = Open;
+    public void setOpen(String open) {
+        this.open = open;
     }
 
-    /**
-     * @return The PreviousClose
-     */
     public String getPreviousClose() {
-        return PreviousClose;
+        return previousClose;
     }
 
-    /**
-     * @param PreviousClose The PreviousClose
-     */
-    public void setPreviousClose(String PreviousClose) {
-        this.PreviousClose = PreviousClose;
+    public void setPreviousClose(String previousClose) {
+        this.previousClose = previousClose;
     }
 
-    /**
-     * @return The PricePaid
-     */
-    public Object getPricePaid() {
-        return PricePaid;
+    public String getPricePaid() {
+        return pricePaid;
     }
 
-    /**
-     * @param PricePaid The PricePaid
-     */
-    public void setPricePaid(Object PricePaid) {
-        this.PricePaid = PricePaid;
+    public void setPricePaid(String pricePaid) {
+        this.pricePaid = pricePaid;
     }
 
-    /**
-     * @return The ChangeinPercent
-     */
     public String getChangeinPercent() {
-        return ChangeinPercent;
+        return changeinPercent;
     }
 
-    /**
-     * @param ChangeinPercent The ChangeinPercent
-     */
-    public void setChangeinPercent(String ChangeinPercent) {
-        this.ChangeinPercent = ChangeinPercent;
+    public void setChangeinPercent(String changeinPercent) {
+        this.changeinPercent = changeinPercent;
     }
 
-    /**
-     * @return The PriceSales
-     */
     public String getPriceSales() {
-        return PriceSales;
+        return priceSales;
     }
 
-    /**
-     * @param PriceSales The PriceSales
-     */
-    public void setPriceSales(String PriceSales) {
-        this.PriceSales = PriceSales;
+    public void setPriceSales(String priceSales) {
+        this.priceSales = priceSales;
     }
 
-    /**
-     * @return The PriceBook
-     */
     public String getPriceBook() {
-        return PriceBook;
+        return priceBook;
     }
 
-    /**
-     * @param PriceBook The PriceBook
-     */
-    public void setPriceBook(String PriceBook) {
-        this.PriceBook = PriceBook;
+    public void setPriceBook(String priceBook) {
+        this.priceBook = priceBook;
     }
 
-    /**
-     * @return The ExDividendDate
-     */
-    public Object getExDividendDate() {
-        return ExDividendDate;
+    public String getExDividendDate() {
+        return exDividendDate;
     }
 
-    /**
-     * @param ExDividendDate The ExDividendDate
-     */
-    public void setExDividendDate(Object ExDividendDate) {
-        this.ExDividendDate = ExDividendDate;
+    public void setExDividendDate(String exDividendDate) {
+        this.exDividendDate = exDividendDate;
     }
 
-    /**
-     * @return The PERatio
-     */
-    public Object getPERatio() {
-        return PERatio;
+    public String getpERatio() {
+        return pERatio;
     }
 
-    /**
-     * @param PERatio The PERatio
-     */
-    public void setPERatio(Object PERatio) {
-        this.PERatio = PERatio;
+    public void setpERatio(String pERatio) {
+        this.pERatio = pERatio;
     }
 
-    /**
-     * @return The DividendPayDate
-     */
-    public Object getDividendPayDate() {
-        return DividendPayDate;
+    public String getDividendPayDate() {
+        return dividendPayDate;
     }
 
-    /**
-     * @param DividendPayDate The DividendPayDate
-     */
-    public void setDividendPayDate(Object DividendPayDate) {
-        this.DividendPayDate = DividendPayDate;
+    public void setDividendPayDate(String dividendPayDate) {
+        this.dividendPayDate = dividendPayDate;
     }
 
-    /**
-     * @return The PERatioRealtime
-     */
-    public Object getPERatioRealtime() {
-        return PERatioRealtime;
+    public String getpERatioRealtime() {
+        return pERatioRealtime;
     }
 
-    /**
-     * @param PERatioRealtime The PERatioRealtime
-     */
-    public void setPERatioRealtime(Object PERatioRealtime) {
-        this.PERatioRealtime = PERatioRealtime;
+    public void setpERatioRealtime(String pERatioRealtime) {
+        this.pERatioRealtime = pERatioRealtime;
     }
 
-    /**
-     * @return The PEGRatio
-     */
-    public String getPEGRatio() {
-        return PEGRatio;
+    public String getpEGRatio() {
+        return pEGRatio;
     }
 
-    /**
-     * @param PEGRatio The PEGRatio
-     */
-    public void setPEGRatio(String PEGRatio) {
-        this.PEGRatio = PEGRatio;
+    public void setpEGRatio(String pEGRatio) {
+        this.pEGRatio = pEGRatio;
     }
 
-    /**
-     * @return The PriceEPSEstimateCurrentYear
-     */
     public String getPriceEPSEstimateCurrentYear() {
-        return PriceEPSEstimateCurrentYear;
+        return priceEPSEstimateCurrentYear;
     }
 
-    /**
-     * @param PriceEPSEstimateCurrentYear The PriceEPSEstimateCurrentYear
-     */
-    public void setPriceEPSEstimateCurrentYear(String PriceEPSEstimateCurrentYear) {
-        this.PriceEPSEstimateCurrentYear = PriceEPSEstimateCurrentYear;
+    public void setPriceEPSEstimateCurrentYear(String priceEPSEstimateCurrentYear) {
+        this.priceEPSEstimateCurrentYear = priceEPSEstimateCurrentYear;
     }
 
-    /**
-     * @return The PriceEPSEstimateNextYear
-     */
     public String getPriceEPSEstimateNextYear() {
-        return PriceEPSEstimateNextYear;
+        return priceEPSEstimateNextYear;
     }
 
-    /**
-     * @param PriceEPSEstimateNextYear The PriceEPSEstimateNextYear
-     */
-    public void setPriceEPSEstimateNextYear(String PriceEPSEstimateNextYear) {
-        this.PriceEPSEstimateNextYear = PriceEPSEstimateNextYear;
+    public void setPriceEPSEstimateNextYear(String priceEPSEstimateNextYear) {
+        this.priceEPSEstimateNextYear = priceEPSEstimateNextYear;
     }
 
-    /**
-     * @return The SharesOwned
-     */
-    public Object getSharesOwned() {
-        return SharesOwned;
+    public String getSharesOwned() {
+        return sharesOwned;
     }
 
-    /**
-     * @param SharesOwned The SharesOwned
-     */
-    public void setSharesOwned(Object SharesOwned) {
-        this.SharesOwned = SharesOwned;
+    public void setSharesOwned(String sharesOwned) {
+        this.sharesOwned = sharesOwned;
     }
 
-    /**
-     * @return The ShortRatio
-     */
     public String getShortRatio() {
-        return ShortRatio;
+        return shortRatio;
     }
 
-    /**
-     * @param ShortRatio The ShortRatio
-     */
-    public void setShortRatio(String ShortRatio) {
-        this.ShortRatio = ShortRatio;
+    public void setShortRatio(String shortRatio) {
+        this.shortRatio = shortRatio;
     }
 
-    /**
-     * @return The LastTradeTime
-     */
     public String getLastTradeTime() {
-        return LastTradeTime;
+        return lastTradeTime;
     }
 
-    /**
-     * @param LastTradeTime The LastTradeTime
-     */
-    public void setLastTradeTime(String LastTradeTime) {
-        this.LastTradeTime = LastTradeTime;
+    public void setLastTradeTime(String lastTradeTime) {
+        this.lastTradeTime = lastTradeTime;
     }
 
-    /**
-     * @return The TickerTrend
-     */
-    public Object getTickerTrend() {
-        return TickerTrend;
+    public String getTickerTrend() {
+        return tickerTrend;
     }
 
-    /**
-     * @param TickerTrend The TickerTrend
-     */
-    public void setTickerTrend(Object TickerTrend) {
-        this.TickerTrend = TickerTrend;
+    public void setTickerTrend(String tickerTrend) {
+        this.tickerTrend = tickerTrend;
     }
 
-    /**
-     * @return The OneyrTargetPrice
-     */
     public String getOneyrTargetPrice() {
-        return OneyrTargetPrice;
+        return oneyrTargetPrice;
     }
 
-    /**
-     * @param OneyrTargetPrice The OneyrTargetPrice
-     */
-    public void setOneyrTargetPrice(String OneyrTargetPrice) {
-        this.OneyrTargetPrice = OneyrTargetPrice;
+    public void setOneyrTargetPrice(String oneyrTargetPrice) {
+        this.oneyrTargetPrice = oneyrTargetPrice;
     }
 
-    /**
-     * @return The Volume
-     */
     public String getVolume() {
-        return Volume;
+        return volume;
     }
 
-    /**
-     * @param Volume The Volume
-     */
-    public void setVolume(String Volume) {
-        this.Volume = Volume;
+    public void setVolume(String volume) {
+        this.volume = volume;
     }
 
-    /**
-     * @return The HoldingsValue
-     */
-    public Object getHoldingsValue() {
-        return HoldingsValue;
+    public String getHoldingsValue() {
+        return holdingsValue;
     }
 
-    /**
-     * @param HoldingsValue The HoldingsValue
-     */
-    public void setHoldingsValue(Object HoldingsValue) {
-        this.HoldingsValue = HoldingsValue;
+    public void setHoldingsValue(String holdingsValue) {
+        this.holdingsValue = holdingsValue;
     }
 
-    /**
-     * @return The HoldingsValueRealtime
-     */
-    public Object getHoldingsValueRealtime() {
-        return HoldingsValueRealtime;
+    public String getHoldingsValueRealtime() {
+        return holdingsValueRealtime;
     }
 
-    /**
-     * @param HoldingsValueRealtime The HoldingsValueRealtime
-     */
-    public void setHoldingsValueRealtime(Object HoldingsValueRealtime) {
-        this.HoldingsValueRealtime = HoldingsValueRealtime;
+    public void setHoldingsValueRealtime(String holdingsValueRealtime) {
+        this.holdingsValueRealtime = holdingsValueRealtime;
     }
 
-    /**
-     * @return The YearRange
-     */
     public String getYearRange() {
-        return YearRange;
+        return yearRange;
     }
 
-    /**
-     * @param YearRange The YearRange
-     */
-    public void setYearRange(String YearRange) {
-        this.YearRange = YearRange;
+    public void setYearRange(String yearRange) {
+        this.yearRange = yearRange;
     }
 
-    /**
-     * @return The DaysValueChange
-     */
-    public Object getDaysValueChange() {
-        return DaysValueChange;
+    public String getDaysValueChange() {
+        return daysValueChange;
     }
 
-    /**
-     * @param DaysValueChange The DaysValueChange
-     */
-    public void setDaysValueChange(Object DaysValueChange) {
-        this.DaysValueChange = DaysValueChange;
+    public void setDaysValueChange(String daysValueChange) {
+        this.daysValueChange = daysValueChange;
     }
 
-    /**
-     * @return The DaysValueChangeRealtime
-     */
-    public Object getDaysValueChangeRealtime() {
-        return DaysValueChangeRealtime;
+    public String getDaysValueChangeRealtime() {
+        return daysValueChangeRealtime;
     }
 
-    /**
-     * @param DaysValueChangeRealtime The DaysValueChangeRealtime
-     */
-    public void setDaysValueChangeRealtime(Object DaysValueChangeRealtime) {
-        this.DaysValueChangeRealtime = DaysValueChangeRealtime;
+    public void setDaysValueChangeRealtime(String daysValueChangeRealtime) {
+        this.daysValueChangeRealtime = daysValueChangeRealtime;
     }
 
-    /**
-     * @return The StockExchange
-     */
     public String getStockExchange() {
-        return StockExchange;
+        return stockExchange;
     }
 
-    /**
-     * @param StockExchange The StockExchange
-     */
-    public void setStockExchange(String StockExchange) {
-        this.StockExchange = StockExchange;
+    public void setStockExchange(String stockExchange) {
+        this.stockExchange = stockExchange;
     }
 
-    /**
-     * @return The DividendYield
-     */
-    public Object getDividendYield() {
-        return DividendYield;
+    public String getDividendYield() {
+        return dividendYield;
     }
 
-    /**
-     * @param DividendYield The DividendYield
-     */
-    public void setDividendYield(Object DividendYield) {
-        this.DividendYield = DividendYield;
+    public void setDividendYield(String dividendYield) {
+        this.dividendYield = dividendYield;
     }
 
-    /**
-     * @return The PercentChange
-     */
     public String getPercentChange() {
-        return PercentChange;
+        return percentChange;
     }
 
-    /**
-     * @param PercentChange The PercentChange
-     */
-    public void setPercentChange(String PercentChange) {
-        this.PercentChange = PercentChange;
+    public void setPercentChange(String percentChange) {
+        this.percentChange = percentChange;
     }
 
-    protected Quote(Parcel in) {
-        symbol = in.readString();
-        Ask = in.readString();
-        AverageDailyVolume = in.readString();
-        Bid = in.readString();
-        AskRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        BidRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        BookValue = in.readString();
-        ChangePercentChange = in.readString();
-        Change = in.readString();
-        Commission = (Object) in.readValue(Object.class.getClassLoader());
-        Currency = in.readString();
-        ChangeRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        AfterHoursChangeRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        DividendShare = (Object) in.readValue(Object.class.getClassLoader());
-        LastTradeDate = in.readString();
-        TradeDate = (Object) in.readValue(Object.class.getClassLoader());
-        EarningsShare = in.readString();
-        ErrorIndicationreturnedforsymbolchangedinvalid = (Object) in.readValue(Object.class.getClassLoader());
-        EPSEstimateCurrentYear = in.readString();
-        EPSEstimateNextYear = in.readString();
-        EPSEstimateNextQuarter = in.readString();
-        DaysLow = in.readString();
-        DaysHigh = in.readString();
-        YearLow = in.readString();
-        YearHigh = in.readString();
-        HoldingsGainPercent = (Object) in.readValue(Object.class.getClassLoader());
-        AnnualizedGain = (Object) in.readValue(Object.class.getClassLoader());
-        HoldingsGain = (Object) in.readValue(Object.class.getClassLoader());
-        HoldingsGainPercentRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        HoldingsGainRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        MoreInfo = (Object) in.readValue(Object.class.getClassLoader());
-        OrderBookRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        MarketCapitalization = in.readString();
-        MarketCapRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        EBITDA = in.readString();
-        ChangeFromYearLow = in.readString();
-        PercentChangeFromYearLow = in.readString();
-        LastTradeRealtimeWithTime = (Object) in.readValue(Object.class.getClassLoader());
-        ChangePercentRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        ChangeFromYearHigh = in.readString();
-        PercebtChangeFromYearHigh = in.readString();
-        LastTradeWithTime = in.readString();
-        LastTradePriceOnly = in.readString();
-        HighLimit = (Object) in.readValue(Object.class.getClassLoader());
-        LowLimit = (Object) in.readValue(Object.class.getClassLoader());
-        DaysRange = in.readString();
-        DaysRangeRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        FiftydayMovingAverage = in.readString();
-        TwoHundreddayMovingAverage = in.readString();
-        ChangeFromTwoHundreddayMovingAverage = in.readString();
-        PercentChangeFromTwoHundreddayMovingAverage = in.readString();
-        ChangeFromFiftydayMovingAverage = in.readString();
-        PercentChangeFromFiftydayMovingAverage = in.readString();
-        Name = in.readString();
-        Notes = (Object) in.readValue(Object.class.getClassLoader());
-        Open = in.readString();
-        PreviousClose = in.readString();
-        PricePaid = (Object) in.readValue(Object.class.getClassLoader());
-        ChangeinPercent = in.readString();
-        PriceSales = in.readString();
-        PriceBook = in.readString();
-        ExDividendDate = (Object) in.readValue(Object.class.getClassLoader());
-        PERatio = (Object) in.readValue(Object.class.getClassLoader());
-        DividendPayDate = (Object) in.readValue(Object.class.getClassLoader());
-        PERatioRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        PEGRatio = in.readString();
-        PriceEPSEstimateCurrentYear = in.readString();
-        PriceEPSEstimateNextYear = in.readString();
-        SharesOwned = (Object) in.readValue(Object.class.getClassLoader());
-        ShortRatio = in.readString();
-        LastTradeTime = in.readString();
-        TickerTrend = (Object) in.readValue(Object.class.getClassLoader());
-        OneyrTargetPrice = in.readString();
-        Volume = in.readString();
-        HoldingsValue = (Object) in.readValue(Object.class.getClassLoader());
-        HoldingsValueRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        YearRange = in.readString();
-        DaysValueChange = (Object) in.readValue(Object.class.getClassLoader());
-        DaysValueChangeRealtime = (Object) in.readValue(Object.class.getClassLoader());
-        StockExchange = in.readString();
-        DividendYield = (Object) in.readValue(Object.class.getClassLoader());
-        PercentChange = in.readString();
-    }
 
     @Override
     public int describeContents() {
@@ -1540,95 +1030,184 @@ public class Quote implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(symbol);
-        dest.writeString(Ask);
-        dest.writeString(AverageDailyVolume);
-        dest.writeString(Bid);
-        dest.writeValue(AskRealtime);
-        dest.writeValue(BidRealtime);
-        dest.writeString(BookValue);
-        dest.writeString(ChangePercentChange);
-        dest.writeString(Change);
-        dest.writeValue(Commission);
-        dest.writeString(Currency);
-        dest.writeValue(ChangeRealtime);
-        dest.writeValue(AfterHoursChangeRealtime);
-        dest.writeValue(DividendShare);
-        dest.writeString(LastTradeDate);
-        dest.writeValue(TradeDate);
-        dest.writeString(EarningsShare);
-        dest.writeValue(ErrorIndicationreturnedforsymbolchangedinvalid);
-        dest.writeString(EPSEstimateCurrentYear);
-        dest.writeString(EPSEstimateNextYear);
-        dest.writeString(EPSEstimateNextQuarter);
-        dest.writeString(DaysLow);
-        dest.writeString(DaysHigh);
-        dest.writeString(YearLow);
-        dest.writeString(YearHigh);
-        dest.writeValue(HoldingsGainPercent);
-        dest.writeValue(AnnualizedGain);
-        dest.writeValue(HoldingsGain);
-        dest.writeValue(HoldingsGainPercentRealtime);
-        dest.writeValue(HoldingsGainRealtime);
-        dest.writeValue(MoreInfo);
-        dest.writeValue(OrderBookRealtime);
-        dest.writeString(MarketCapitalization);
-        dest.writeValue(MarketCapRealtime);
-        dest.writeString(EBITDA);
-        dest.writeString(ChangeFromYearLow);
-        dest.writeString(PercentChangeFromYearLow);
-        dest.writeValue(LastTradeRealtimeWithTime);
-        dest.writeValue(ChangePercentRealtime);
-        dest.writeString(ChangeFromYearHigh);
-        dest.writeString(PercebtChangeFromYearHigh);
-        dest.writeString(LastTradeWithTime);
-        dest.writeString(LastTradePriceOnly);
-        dest.writeValue(HighLimit);
-        dest.writeValue(LowLimit);
-        dest.writeString(DaysRange);
-        dest.writeValue(DaysRangeRealtime);
-        dest.writeString(FiftydayMovingAverage);
-        dest.writeString(TwoHundreddayMovingAverage);
-        dest.writeString(ChangeFromTwoHundreddayMovingAverage);
-        dest.writeString(PercentChangeFromTwoHundreddayMovingAverage);
-        dest.writeString(ChangeFromFiftydayMovingAverage);
-        dest.writeString(PercentChangeFromFiftydayMovingAverage);
-        dest.writeString(Name);
-        dest.writeValue(Notes);
-        dest.writeString(Open);
-        dest.writeString(PreviousClose);
-        dest.writeValue(PricePaid);
-        dest.writeString(ChangeinPercent);
-        dest.writeString(PriceSales);
-        dest.writeString(PriceBook);
-        dest.writeValue(ExDividendDate);
-        dest.writeValue(PERatio);
-        dest.writeValue(DividendPayDate);
-        dest.writeValue(PERatioRealtime);
-        dest.writeString(PEGRatio);
-        dest.writeString(PriceEPSEstimateCurrentYear);
-        dest.writeString(PriceEPSEstimateNextYear);
-        dest.writeValue(SharesOwned);
-        dest.writeString(ShortRatio);
-        dest.writeString(LastTradeTime);
-        dest.writeValue(TickerTrend);
-        dest.writeString(OneyrTargetPrice);
-        dest.writeString(Volume);
-        dest.writeValue(HoldingsValue);
-        dest.writeValue(HoldingsValueRealtime);
-        dest.writeString(YearRange);
-        dest.writeValue(DaysValueChange);
-        dest.writeValue(DaysValueChangeRealtime);
-        dest.writeString(StockExchange);
-        dest.writeValue(DividendYield);
-        dest.writeString(PercentChange);
+        dest.writeInt(this.id);
+        dest.writeString(this.symbol);
+        dest.writeString(this.ask);
+        dest.writeString(this.averageDailyVolume);
+        dest.writeString(this.bid);
+        dest.writeString(this.askRealtime);
+        dest.writeString(this.bidRealtime);
+        dest.writeString(this.bookValue);
+        dest.writeString(this.changePercentChange);
+        dest.writeString(this.change);
+        dest.writeString(this.commission);
+        dest.writeString(this.currency);
+        dest.writeString(this.changeRealtime);
+        dest.writeString(this.afterHoursChangeRealtime);
+        dest.writeString(this.dividendShare);
+        dest.writeString(this.lastTradeDate);
+        dest.writeString(this.tradeDate);
+        dest.writeString(this.earningsShare);
+        dest.writeString(this.errorIndicationreturnedforsymbolchangedinvalid);
+        dest.writeString(this.EPSEstimateCurrentYear);
+        dest.writeString(this.EPSEstimateNextYear);
+        dest.writeString(this.EPSEstimateNextQuarter);
+        dest.writeString(this.daysLow);
+        dest.writeString(this.daysHigh);
+        dest.writeString(this.yearLow);
+        dest.writeString(this.yearHigh);
+        dest.writeString(this.holdingsGainPercent);
+        dest.writeString(this.annualizedGain);
+        dest.writeString(this.holdingsGain);
+        dest.writeString(this.holdingsGainPercentRealtime);
+        dest.writeString(this.holdingsGainRealtime);
+        dest.writeString(this.moreInfo);
+        dest.writeString(this.orderBookRealtime);
+        dest.writeString(this.marketCapitalization);
+        dest.writeString(this.marketCapRealtime);
+        dest.writeString(this.EBITDA);
+        dest.writeString(this.changeFromYearLow);
+        dest.writeString(this.percentChangeFromYearLow);
+        dest.writeString(this.lastTradeRealtimeWithTime);
+        dest.writeString(this.changePercentRealtime);
+        dest.writeString(this.changeFromYearHigh);
+        dest.writeString(this.percebtChangeFromYearHigh);
+        dest.writeString(this.lastTradeWithTime);
+        dest.writeString(this.lastTradePriceOnly);
+        dest.writeString(this.highLimit);
+        dest.writeString(this.lowLimit);
+        dest.writeString(this.daysRange);
+        dest.writeString(this.daysRangeRealtime);
+        dest.writeString(this.fiftydayMovingAverage);
+        dest.writeString(this.twoHundreddayMovingAverage);
+        dest.writeString(this.changeFromTwoHundreddayMovingAverage);
+        dest.writeString(this.percentChangeFromTwoHundreddayMovingAverage);
+        dest.writeString(this.changeFromFiftydayMovingAverage);
+        dest.writeString(this.percentChangeFromFiftydayMovingAverage);
+        dest.writeString(this.name);
+        dest.writeString(this.notes);
+        dest.writeString(this.open);
+        dest.writeString(this.previousClose);
+        dest.writeString(this.pricePaid);
+        dest.writeString(this.changeinPercent);
+        dest.writeString(this.priceSales);
+        dest.writeString(this.priceBook);
+        dest.writeString(this.exDividendDate);
+        dest.writeString(this.pERatio);
+        dest.writeString(this.dividendPayDate);
+        dest.writeString(this.pERatioRealtime);
+        dest.writeString(this.pEGRatio);
+        dest.writeString(this.priceEPSEstimateCurrentYear);
+        dest.writeString(this.priceEPSEstimateNextYear);
+        dest.writeString(this.sharesOwned);
+        dest.writeString(this.shortRatio);
+        dest.writeString(this.lastTradeTime);
+        dest.writeString(this.tickerTrend);
+        dest.writeString(this.oneyrTargetPrice);
+        dest.writeString(this.volume);
+        dest.writeString(this.holdingsValue);
+        dest.writeString(this.holdingsValueRealtime);
+        dest.writeString(this.yearRange);
+        dest.writeString(this.daysValueChange);
+        dest.writeString(this.daysValueChangeRealtime);
+        dest.writeString(this.stockExchange);
+        dest.writeString(this.dividendYield);
+        dest.writeString(this.percentChange);
     }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Quote> CREATOR = new Parcelable.Creator<Quote>() {
+    public Quote() {
+    }
+
+    protected Quote(Parcel in) {
+        this.id = in.readInt();
+        this.symbol = in.readString();
+        this.ask = in.readString();
+        this.averageDailyVolume = in.readString();
+        this.bid = in.readString();
+        this.askRealtime = in.readString();
+        this.bidRealtime = in.readString();
+        this.bookValue = in.readString();
+        this.changePercentChange = in.readString();
+        this.change = in.readString();
+        this.commission = in.readString();
+        this.currency = in.readString();
+        this.changeRealtime = in.readString();
+        this.afterHoursChangeRealtime = in.readString();
+        this.dividendShare = in.readString();
+        this.lastTradeDate = in.readString();
+        this.tradeDate = in.readString();
+        this.earningsShare = in.readString();
+        this.errorIndicationreturnedforsymbolchangedinvalid = in.readString();
+        this.EPSEstimateCurrentYear = in.readString();
+        this.EPSEstimateNextYear = in.readString();
+        this.EPSEstimateNextQuarter = in.readString();
+        this.daysLow = in.readString();
+        this.daysHigh = in.readString();
+        this.yearLow = in.readString();
+        this.yearHigh = in.readString();
+        this.holdingsGainPercent = in.readString();
+        this.annualizedGain = in.readString();
+        this.holdingsGain = in.readString();
+        this.holdingsGainPercentRealtime = in.readString();
+        this.holdingsGainRealtime = in.readString();
+        this.moreInfo = in.readString();
+        this.orderBookRealtime = in.readString();
+        this.marketCapitalization = in.readString();
+        this.marketCapRealtime = in.readString();
+        this.EBITDA = in.readString();
+        this.changeFromYearLow = in.readString();
+        this.percentChangeFromYearLow = in.readString();
+        this.lastTradeRealtimeWithTime = in.readString();
+        this.changePercentRealtime = in.readString();
+        this.changeFromYearHigh = in.readString();
+        this.percebtChangeFromYearHigh = in.readString();
+        this.lastTradeWithTime = in.readString();
+        this.lastTradePriceOnly = in.readString();
+        this.highLimit = in.readString();
+        this.lowLimit = in.readString();
+        this.daysRange = in.readString();
+        this.daysRangeRealtime = in.readString();
+        this.fiftydayMovingAverage = in.readString();
+        this.twoHundreddayMovingAverage = in.readString();
+        this.changeFromTwoHundreddayMovingAverage = in.readString();
+        this.percentChangeFromTwoHundreddayMovingAverage = in.readString();
+        this.changeFromFiftydayMovingAverage = in.readString();
+        this.percentChangeFromFiftydayMovingAverage = in.readString();
+        this.name = in.readString();
+        this.notes = in.readString();
+        this.open = in.readString();
+        this.previousClose = in.readString();
+        this.pricePaid = in.readParcelable(Object.class.getClassLoader());
+        this.changeinPercent = in.readString();
+        this.priceSales = in.readString();
+        this.priceBook = in.readString();
+        this.exDividendDate = in.readString();
+        this.pERatio = in.readString();
+        this.dividendPayDate = in.readString();
+        this.pERatioRealtime = in.readString();
+        this.pEGRatio = in.readString();
+        this.priceEPSEstimateCurrentYear = in.readString();
+        this.priceEPSEstimateNextYear = in.readString();
+        this.sharesOwned = in.readString();
+        this.shortRatio = in.readString();
+        this.lastTradeTime = in.readString();
+        this.tickerTrend = in.readString();
+        this.oneyrTargetPrice = in.readString();
+        this.volume = in.readString();
+        this.holdingsValue = in.readString();
+        this.holdingsValueRealtime = in.readString();
+        this.yearRange = in.readString();
+        this.daysValueChange = in.readString();
+        this.daysValueChangeRealtime = in.readString();
+        this.stockExchange = in.readString();
+        this.dividendYield = in.readString();
+        this.percentChange = in.readString();
+    }
+
+    public static final Creator<Quote> CREATOR = new Creator<Quote>() {
         @Override
-        public Quote createFromParcel(Parcel in) {
-            return new Quote(in);
+        public Quote createFromParcel(Parcel source) {
+            return new Quote(source);
         }
 
         @Override

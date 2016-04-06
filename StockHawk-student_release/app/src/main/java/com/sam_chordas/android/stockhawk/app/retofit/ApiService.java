@@ -1,7 +1,7 @@
 package com.sam_chordas.android.stockhawk.app.retofit;
 
 
-import com.squareup.okhttp.ResponseBody;
+import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuote;
 
 import retrofit.Call;
 import retrofit.http.GET;
@@ -25,5 +25,5 @@ import retrofit.http.Query;
 public interface ApiService {
 
     @GET("yql")
-    Call<ResponseBody> getQuotes(@Query("q") String q);
+    Call<ResponseQuote> getQuotes(@Query("q") String q);
 }

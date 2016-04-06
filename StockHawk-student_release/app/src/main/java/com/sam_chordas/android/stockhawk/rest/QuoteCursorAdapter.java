@@ -38,7 +38,6 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-    robotoLight = Typeface.createFromAsset(mContext.getAssets(), "fonts/Roboto-Light.ttf");
     View itemView = LayoutInflater.from(parent.getContext())
         .inflate(R.layout.list_item_quote, parent, false);
     ViewHolder vh = new ViewHolder(itemView);
@@ -93,10 +92,10 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
     public final TextView change;
     public ViewHolder(View itemView){
       super(itemView);
-      symbol = (TextView) itemView.findViewById(R.id.stock_symbol);
+      symbol = (TextView) itemView.findViewById(R.id.tVStockSymbol);
       symbol.setTypeface(robotoLight);
-      bidPrice = (TextView) itemView.findViewById(R.id.bid_price);
-      change = (TextView) itemView.findViewById(R.id.change);
+      bidPrice = (TextView) itemView.findViewById(R.id.tVBidPrice);
+      change = (TextView) itemView.findViewById(R.id.tVChange);
     }
 
     @Override

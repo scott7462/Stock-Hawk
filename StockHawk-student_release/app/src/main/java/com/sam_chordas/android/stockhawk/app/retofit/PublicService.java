@@ -1,7 +1,7 @@
 package com.sam_chordas.android.stockhawk.app.retofit;
 
 
-import com.squareup.okhttp.ResponseBody;
+import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuote;
 
 import retrofit.Call;
 
@@ -28,7 +28,7 @@ public class PublicService {
         this.apiService = apiService;
     }
 
-    public Call<ResponseBody> getQuotes(String q) {
+    public Call<ResponseQuote> getQuotes(String q) {
         return apiService.getQuotes(q);
     }
 
