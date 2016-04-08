@@ -18,6 +18,11 @@ public class Query {
     @Expose
     private String lang;
 
+    @SerializedName("results")
+    @Expose
+    private Result results;
+
+
     /**
      * @return The count
      */
@@ -58,6 +63,15 @@ public class Query {
      */
     public void setLang(String lang) {
         this.lang = lang;
+    }
+
+
+    public Result getResults() {
+        return results;
+    }
+
+    public void setResults(Result results) {
+        this.results = results;
     }
 
 }

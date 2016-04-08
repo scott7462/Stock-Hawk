@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.App;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
-import com.sam_chordas.android.stockhawk.rest.Utils;
 
 import java.util.ArrayList;
 
@@ -38,6 +37,8 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
     private static final String TAG = AdapterQuote.class.getSimpleName();
     ArrayList<Quote> items;
 
+    public static boolean showPercent = true;
+
     public AdapterQuote(ArrayList<Quote> items) {
         this.items = items;
     }
@@ -54,26 +55,26 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
         holder.tVStockSymbol.setText(quote.getSymbol());
         holder.tVBidPrice.setText(quote.getBid());
         int sdk = Build.VERSION.SDK_INT;
-        if (quote.up == 1){
-            if (sdk < Build.VERSION_CODES.JELLY_BEAN){
+        if (quote.getChange().charAt(0) != '-') {
+            if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
                 holder.tVChange.setBackgroundDrawable(
                         App.getGlobalContext().getResources().getDrawable(R.drawable.percent_change_pill_green));
-            }else {
+            } else {
                 holder.tVChange.setBackground(
                         App.getGlobalContext().getResources().getDrawable(R.drawable.percent_change_pill_green));
             }
-        } else{
+        } else {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
                 holder.tVChange.setBackgroundDrawable(
                         App.getGlobalContext().getResources().getDrawable(R.drawable.percent_change_pill_red));
-            } else{
+            } else {
                 holder.tVChange.setBackground(
                         App.getGlobalContext().getResources().getDrawable(R.drawable.percent_change_pill_red));
             }
         }
-        if (Utils.showPercent){
+        if (showPercent) {
             holder.tVChange.setText(quote.getPercentChange());
-        } else{
+        } else {
             holder.tVChange.setText(quote.getChange());
         }
     }

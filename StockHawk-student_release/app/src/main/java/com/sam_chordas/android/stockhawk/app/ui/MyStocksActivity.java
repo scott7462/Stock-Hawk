@@ -1,78 +1,32 @@
 package com.sam_chordas.android.stockhawk.app.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
-import com.melnykov.fab.FloatingActionButton;
 import com.sam_chordas.android.stockhawk.R;
-import com.sam_chordas.android.stockhawk.app.service.StockIntentService;
-import com.sam_chordas.android.stockhawk.app.service.StockTaskService;
-import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
-import com.sam_chordas.android.stockhawk.data.QuoteProvider;
-import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
-import com.sam_chordas.android.stockhawk.rest.Utils;
+import com.sam_chordas.android.stockhawk.app.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class MyStocksActivity extends AppCompatActivity {
-    @Bind(R.id.recycler_view)
-    RecyclerView recyclerView;
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-    @OnClick(R.id.fab)
-    public void onClick() {
+public class MyStocksActivity extends BaseActivity {
 
-    }
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private Intent mServiceIntent;
-    private ItemTouchHelper mItemTouchHelper;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_stocks);
         ButterKnife.bind(this);
-        mServiceIntent = new Intent(this, StockIntentService.class);
-        if (savedInstanceState == null) {
-            // Run the initialize task service so that some stocks appear upon an empty database
-            mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.INIT.toString());
-            if (ConnectionUtils.isOnline(this)) {
-                startService(mServiceIntent);
-            } else {
-                networkToast();
-            }
+        setSupportActionBar(toolbar);
+        if (savedInstanceState != null) {
+            navigateMainContent(getSupportFragmentManager().getFragment(
+                    savedInstanceState, "mContent"), getString(R.string.app_name));
+        } else {
+            navigateMainContent(HomeFragment.newInstance(), getString(R.string.app_name));
         }
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
-//
-//        mCursorAdapter = new QuoteCursorAdapter(this, null);
-//        recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this,
-//                new RecyclerViewItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View v, int position) {
-//                        //TODO:
-//                        // do something on item click
-//                    }
-//                }));
-//        recyclerView.setAdapter(mCursorAdapter);
-//
+
 //
 //                      Toast toast =
 //                                                Toast.makeText(MyStocksActivity.this, "This stock is already saved!",
@@ -140,78 +94,10 @@ public class MyStocksActivity extends AppCompatActivity {
 //        }
     }
 
-
     @Override
-    public void onResume() {
-        super.onResume();
-//        getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, this);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager().putFragment(outState, "mContent", getSupportFragmentManager().findFragmentById(R.id.container));
     }
-
-    public void networkToast() {
-
-        Toast.makeText(this, getString(R.string.network_toast), Toast.LENGTH_SHORT).show();
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(getString(R.string.app_name));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_stocks, menu);
-        restoreActionBar();
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        if (id == R.id.action_change_units) {
-            // this is for changing stock changes from percent value to dollar value
-            Utils.showPercent = !Utils.showPercent;
-            this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-//
-//    @Override
-//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//        // This narrows the return to only the stocks that are most current.
-//        return new CursorLoader(this, QuoteProvider.Quotes.CONTENT_URI,
-//                new String[]{QuoteColumns._ID, QuoteColumns.SYMBOL, QuoteColumns.BIDPRICE,
-//                        QuoteColumns.PERCENT_CHANGE, QuoteColumns.CHANGE, QuoteColumns.ISUP},
-//                QuoteColumns.ISCURRENT + " = ?",
-//                new String[]{"1"},
-//                null);
-//    }
-//
-//    @Override
-//    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-//        mCursorAdapter.swapCursor(data);
-//        mCursor = data;
-//    }
-//
-//    @Override
-//    public void onLoaderReset(Loader<Cursor> loader) {
-//        mCursorAdapter.swapCursor(null);
-//    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
 
 }

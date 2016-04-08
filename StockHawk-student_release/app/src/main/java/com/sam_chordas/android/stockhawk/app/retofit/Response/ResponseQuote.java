@@ -8,33 +8,22 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ResponseQuote {
 
-    @SerializedName("Query")
+    @SerializedName("query")
     @Expose
-    private Query Query;
-
-    @SerializedName("results")
-    @Expose
-    private Result result;
+    private Query query;
 
     /**
-     * @return The Query
+     * @return The query
      */
     public Query getQuery() {
-        return Query;
+        return query;
     }
 
     /**
-     * @param Query The Query
+     * @param Query The query
      */
     public void setQuery(Query Query) {
-        this.Query = Query;
+        this.query = Query;
     }
 
-    public Result getResult() {
-        return result;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
-    }
 }

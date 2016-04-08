@@ -6,6 +6,7 @@ import com.sam_chordas.android.stockhawk.app.model.Quote;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -56,24 +57,17 @@ public class QuoteDaoAdapter {
     /**
      * validate if the movie is in the database
      */
-    public static boolean isQuoteFavorite(int id) throws SQLException {
+    public static boolean isQuote(String symbol) throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
         Dao<Quote, Integer> quotesDao = dbHelper.getQuoteDao();
-        Quote quote = quotesDao.queryForId(id);
-        return (quote != null && quote.getId() == id);
+        List<Quote> quotes = quotesDao.queryBuilder().where().eq("symbol", symbol).query();
+        return (quotes != null && quotes.size() > 0);
     }
 
-    /**
-     * abstract the implementation to set or remove favorite
-     */
-    public static boolean favoriteMovie(Quote movie) throws SQLException {
-        if (isQuoteFavorite(movie.getId())) {
-            removeQuote(movie);
-            return false;
-        } else {
-            insertQuote(movie);
-            return true;
-        }
-    }
 
+    public static void removeAllQuote() throws SQLException {
+        DBQLiteHelper dbHelper = App.getDBExternalHelper();
+        Dao<Quote, Integer> quotesDao = dbHelper.getQuoteDao();
+        quotesDao.delete(quotesDao.queryForAll());
+    }
 }

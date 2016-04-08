@@ -5,6 +5,8 @@ import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.App;
+import com.sam_chordas.android.stockhawk.app.busevents.BusProvider;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventUpdateData;
 import com.sam_chordas.android.stockhawk.app.db.QuoteDaoAdapter;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
 import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuote;
@@ -28,12 +30,13 @@ public class StockTaskService extends GcmTaskService {
     private String LOG_TAG = StockTaskService.class.getSimpleName();
     private StringBuilder mStoredSymbols = new StringBuilder();
     private Subscription serviceSubscription;
+    private boolean isUpdate = false;
 
     public enum CALLS {
         INIT("init"),
         PERIODIC("periodic"),
         ADD("add"),
-        TAG("TAG");
+        TAG("tag");
 
         private final String text;
 
@@ -75,6 +78,7 @@ public class StockTaskService extends GcmTaskService {
             if (quotes.size() == 0) {
                 urlStringBuilder.append("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")");
             } else {
+                isUpdate = true;
                 for (Quote quote : quotes) {
                     mStoredSymbols.append("\"").append(quote.getSymbol()).append("\",");
                 }
@@ -91,14 +95,19 @@ public class StockTaskService extends GcmTaskService {
             try {
                 Response<ResponseQuote> response = App.getRestClientPublic().getPublicService().getQuotes(urlStringBuilder.toString()).execute();
                 if (response.isSuccess() && response.body() != null
-                        && response.body().getResult() != null &&
-                        response.body().getResult().getQuote() != null &&
-                        response.body().getResult().getQuote().size() > 0) {
+                        && response.body().getQuery().getResults() != null &&
+                        response.body().getQuery().getResults().getQuote() != null &&
+                        response.body().getQuery().getResults().getQuote().size() > 0) {
+                    if (isUpdate) {
+                        QuoteDaoAdapter.removeAllQuote();
+                    }
+
                     result = GcmNetworkManager.RESULT_SUCCESS;
-                    for (Quote quote : response.body().getResult().getQuote()) {
+                    for (Quote quote : response.body().getQuery().getResults().getQuote()) {
                         QuoteDaoAdapter.insertQuote(quote);
                     }
                 }
+                BusProvider.getInstance().postOnNonUIThread(new EventUpdateData());
                 Timber.d(TAG, response.toString());
             } catch (IOException | SQLException e) {
                 e.printStackTrace();
@@ -108,4 +117,15 @@ public class StockTaskService extends GcmTaskService {
         return result;
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BusProvider.getInstance().unregister(this);
+    }
 }
