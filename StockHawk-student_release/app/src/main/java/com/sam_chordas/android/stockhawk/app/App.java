@@ -6,7 +6,7 @@ import android.support.multidex.MultiDexApplication;
 
 import com.facebook.stetho.Stetho;
 import com.sam_chordas.android.stockhawk.R;
-import com.sam_chordas.android.stockhawk.app.db.DBQLiteHelper;
+import com.sam_chordas.android.stockhawk.db.DBQLiteHelper;
 import com.sam_chordas.android.stockhawk.app.retofit.RestClientPublic;
 
 /**

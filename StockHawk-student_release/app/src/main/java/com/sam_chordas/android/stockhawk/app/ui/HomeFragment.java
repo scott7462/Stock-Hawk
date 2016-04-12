@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,18 +15,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.gcm.GcmNetworkManager;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.busevents.BusProvider;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventUpdateData;
-import com.sam_chordas.android.stockhawk.app.db.QuoteDaoAdapter;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
-import com.sam_chordas.android.stockhawk.app.service.StockIntentService;
-import com.sam_chordas.android.stockhawk.app.service.StockTaskService;
 import com.sam_chordas.android.stockhawk.app.ui.adapter.AdapterQuote;
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
+import com.sam_chordas.android.stockhawk.db.QuoteDaoAdapter;
+import com.sam_chordas.android.stockhawk.service.StockIntentService;
+import com.sam_chordas.android.stockhawk.service.StockTaskService;
 import com.squareup.otto.Subscribe;
 
 import java.sql.SQLException;
@@ -43,11 +43,12 @@ import butterknife.OnClick;
 public class HomeFragment extends Fragment {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
+    private Intent mServiceIntent;
+    private ItemTouchHelper mItemTouchHelper;
+    private AdapterQuote mCursorAdapter;
 
     @Bind(R.id.rVHome)
     RecyclerView rVHome;
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
 
     @OnClick(R.id.fab)
     public void onClick() {
@@ -63,6 +64,7 @@ public class HomeFragment extends Fragment {
                             try {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
+                                    BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage("This stock is already saved!",getView()), getActivity());
                                     return;
                                 } else {
                                     // Add the stock to DB
@@ -84,9 +86,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private Intent mServiceIntent;
-    private ItemTouchHelper mItemTouchHelper;
-    private AdapterQuote mCursorAdapter;
 
     public static Fragment newInstance() {
         return new HomeFragment();
@@ -102,7 +101,6 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
 
         if (savedInstanceState == null) {
-            // Run the initialize task service so that some stocks appear upon an empty database
             mServiceIntent = new Intent(getActivity(), StockIntentService.class);
             mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.INIT.toString());
             mCursorAdapter = new AdapterQuote(new ArrayList<Quote>());
@@ -125,8 +123,6 @@ public class HomeFragment extends Fragment {
 
 
     private void intViews() {
-
-
         rVHome.setLayoutManager(new LinearLayoutManager(getActivity()));
         try {
             mCursorAdapter.setData(QuoteDaoAdapter.getAllQuote());
@@ -184,8 +180,7 @@ public class HomeFragment extends Fragment {
             }
             case R.id.action_change_units: {
                 // this is for changing stock changes from percent value to dollar value
-//            Utils.showPercent = !Utils.showPercent;
-//            this.getContentResolver().notifyChange(QuoteProvider.Quotes.CONTENT_URI, null);
+                mCursorAdapter.updateShowPercent();
                 return true;
             }
 
@@ -196,16 +191,18 @@ public class HomeFragment extends Fragment {
 
     @Subscribe
     public void loadData(EventUpdateData eventUpdateData) {
-        try {
-            mCursorAdapter.setData(QuoteDaoAdapter.getAllQuote());
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (eventUpdateData.getResult() == GcmNetworkManager.RESULT_SUCCESS) {
+            try {
+                mCursorAdapter.setData(QuoteDaoAdapter.getAllQuote());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
 
     public void networkToast() {
-        Toast.makeText(getActivity(), getString(R.string.network_toast), Toast.LENGTH_SHORT).show();
+        BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage(getString(R.string.network_toast), getView()), getActivity());
     }
 
 

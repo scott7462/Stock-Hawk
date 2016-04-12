@@ -1,13 +1,19 @@
 package com.sam_chordas.android.stockhawk.app.base;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.sam_chordas.android.stockhawk.R;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
 
 import java.util.ArrayList;
 
@@ -29,6 +35,7 @@ import java.util.ArrayList;
  */
 public class BaseActivity extends AppCompatActivity {
 
+    private static final String TAG = BaseActivity.class.getSimpleName();
     protected ArrayList<String> titleStack = new ArrayList<String>();
     Toolbar toolbar;
 
@@ -100,6 +107,63 @@ public class BaseActivity extends AppCompatActivity {
         titleStack.clear();
         titleStack.add(title);
         updateActionBarTitle();
+    }
+
+    public void handleSnackBarMessageEvent(final EventSnackBarMessage event) {
+        this.clearKeyboardFromScreen();
+        final Snackbar snackBar = Snackbar.make(event.getView(),event.getText(), 0);
+        if(event.getActionLabelColor() != 0) {
+            snackBar.setActionTextColor(-1);
+        }
+
+        TextView tv = (TextView)snackBar.getView().findViewById(event.getTextId());
+        if(event.getTextColor() != 0) {
+            if(tv == null) {
+                Log.i(TAG, this.getString(R.string.base_activity_snack_bar_missing_id_error));
+            } else {
+                tv.setTextColor(event.getTextColor());
+            }
+        }
+
+        snackBar.setCallback(new Snackbar.Callback() {
+            public void onDismissed(Snackbar snackbar, int eventCode) {
+                super.onDismissed(snackbar, eventCode);
+                if(event.getOnDetachedToWindowRunnable() != null && event.getOnDetachedToWindowRunnable()[0] != null) {
+                    event.getOnDetachedToWindowRunnable()[0].run();
+                }
+
+            }
+
+            public void onShown(Snackbar snackbar) {
+                super.onShown(snackbar);
+                if(event.getOnAttachedToWindowRunnable() != null && event.getOnAttachedToWindowRunnable()[0] != null) {
+                    event.getOnAttachedToWindowRunnable()[0].run();
+                }
+
+            }
+        });
+        if(event.isCentered()) {
+            tv.setGravity(1);
+        }
+
+        if(event.isActionDismiss()) {
+            snackBar.setAction(event.getActionLabel(), new android.view.View.OnClickListener() {
+                public void onClick(View v) {
+                    snackBar.dismiss();
+                }
+            }).show();
+        } else {
+            snackBar.setAction(event.getActionLabel(), event.getEventListener()).show();
+        }
+
+    }
+
+    public void clearKeyboardFromScreen() {
+        if(this.getWindow().getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager)this.getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(this.getWindow().getCurrentFocus().getWindowToken(), 0);
+        }
+
     }
 
 }

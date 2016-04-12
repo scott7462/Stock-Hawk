@@ -2,6 +2,7 @@ package com.sam_chordas.android.stockhawk.app.retofit;
 
 
 import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuote;
+import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuotes;
 
 import retrofit.Call;
 
@@ -28,8 +29,12 @@ public class PublicService {
         this.apiService = apiService;
     }
 
-    public Call<ResponseQuote> getQuotes(String q) {
-        return apiService.getQuotes(q);
+    public Call<ResponseQuote> getQuote(String q) {
+        return apiService.getQuote(q);
     }
 
+
+    public Call<ResponseQuotes> getQuotes(String q) {
+        return apiService.getQuotes(q);
+    }
 }

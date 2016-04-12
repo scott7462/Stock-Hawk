@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.App;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
+import com.sam_chordas.android.stockhawk.app.utils.SettingsUtils;
 
 import java.util.ArrayList;
 
@@ -72,7 +73,7 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
                         App.getGlobalContext().getResources().getDrawable(R.drawable.percent_change_pill_red));
             }
         }
-        if (showPercent) {
+        if (SettingsUtils.getPreferenceShowPercent()) {
             holder.tVChange.setText(quote.getPercentChange());
         } else {
             holder.tVChange.setText(quote.getChange());
@@ -95,6 +96,11 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
 
     public ArrayList<Quote> getItems() {
         return items;
+    }
+
+    public void updateShowPercent() {
+        SettingsUtils.setPreferenceShowPercent(!SettingsUtils.getPreferenceShowPercent());
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

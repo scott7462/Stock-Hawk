@@ -1,4 +1,4 @@
-package com.sam_chordas.android.stockhawk.app.db;
+package com.sam_chordas.android.stockhawk.db;
 
 import com.j256.ormlite.dao.Dao;
 import com.sam_chordas.android.stockhawk.app.App;

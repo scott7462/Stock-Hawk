@@ -1,4 +1,4 @@
-package com.sam_chordas.android.stockhawk.app.db;
+package com.sam_chordas.android.stockhawk.db;
 
 import android.database.sqlite.SQLiteDatabase;
 

@@ -14,4 +14,5 @@
     <string name="query">select * from yahoo.finance.quotes where symbol in (</string>
     <string name="query_value">\"%1$s\",</string>
     <string name="query_value_end">\"%1$s\" )</string>
+    <string name="base_activity_snack_bar_missing_id_error">Error</string>
 </resources>
