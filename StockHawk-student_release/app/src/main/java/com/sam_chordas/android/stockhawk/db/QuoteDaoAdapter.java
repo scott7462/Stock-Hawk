@@ -46,12 +46,24 @@ public class QuoteDaoAdapter {
     }
 
     /**
-     * remove movie
+     * remove q
      */
     public static int removeQuote(Quote quote) throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
         Dao<Quote, Integer> quotesDao = dbHelper.getQuoteDao();
         return quotesDao.delete(quote);
+    }
+
+    /**
+     * remove q
+     */
+    public static void updatePositions(ArrayList<Quote> quotes) throws SQLException {
+        DBQLiteHelper dbHelper = App.getDBExternalHelper();
+        Dao<Quote, Integer> quotesDao = dbHelper.getQuoteDao();
+        quotesDao.delete(quotes);
+        for (Quote quote : quotes) {
+            quotesDao.create(quote);
+        }
     }
 
     /**
