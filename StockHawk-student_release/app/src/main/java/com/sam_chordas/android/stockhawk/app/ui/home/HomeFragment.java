@@ -1,4 +1,4 @@
-package com.sam_chordas.android.stockhawk.app.ui;
+package com.sam_chordas.android.stockhawk.app.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +20,15 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.busevents.BusProvider;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventRemoveItem;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventUpdateData;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
-import com.sam_chordas.android.stockhawk.app.ui.adapter.AdapterQuote;
+import com.sam_chordas.android.stockhawk.app.ui.MainActivity;
+import com.sam_chordas.android.stockhawk.app.ui.home.adapter.AdapterQuote;
+import com.sam_chordas.android.stockhawk.app.ui.home.adapter.SimpleItemTouchHelperCallback;
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
+import com.sam_chordas.android.stockhawk.app.utils.decoreitors.QuoteItemDecorator;
 import com.sam_chordas.android.stockhawk.db.QuoteDaoAdapter;
 import com.sam_chordas.android.stockhawk.service.StockIntentService;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
@@ -45,7 +49,9 @@ public class HomeFragment extends Fragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
     private Intent mServiceIntent;
     private ItemTouchHelper mItemTouchHelper;
-    private AdapterQuote mCursorAdapter;
+    private AdapterQuote quotedApter;
+    private Quote removeQuote;
+    private int removePosition;
 
     @Bind(R.id.rVHome)
     RecyclerView rVHome;
@@ -59,15 +65,12 @@ public class HomeFragment extends Fragment {
                     .input(R.string.input_hint, R.string.input_prefill, new MaterialDialog.InputCallback() {
                         @Override
                         public void onInput(MaterialDialog dialog, CharSequence input) {
-                            // On FAB click, receive user input. Make sure the stock doesn't already exist
-                            // in the DB and proceed accordingly
                             try {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
-                                    BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage("This stock is already saved!",getView()), getActivity());
+                                    BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage("This stock is already saved!", getView()), getActivity());
                                     return;
                                 } else {
-                                    // Add the stock to DB
                                     mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.ADD.toString());
                                     mServiceIntent.putExtra(Quote.SYMBOL, input.toString());
                                     getActivity().startService(mServiceIntent);
@@ -76,14 +79,11 @@ public class HomeFragment extends Fragment {
                                 e.printStackTrace();
                                 return;
                             }
-
-
                         }
                     }).show();
         } else {
             networkToast();
         }
-
     }
 
 
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
         if (savedInstanceState == null) {
             mServiceIntent = new Intent(getActivity(), StockIntentService.class);
             mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.INIT.toString());
-            mCursorAdapter = new AdapterQuote(new ArrayList<Quote>());
+            quotedApter = new AdapterQuote(new ArrayList<Quote>());
             if (ConnectionUtils.isOnline(getActivity())) {
                 getActivity().startService(mServiceIntent);
             } else {
@@ -125,20 +125,16 @@ public class HomeFragment extends Fragment {
     private void intViews() {
         rVHome.setLayoutManager(new LinearLayoutManager(getActivity()));
         try {
-            mCursorAdapter.setData(QuoteDaoAdapter.getAllQuote());
+            quotedApter.setData(QuoteDaoAdapter.getAllQuote());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this,
-//                new RecyclerViewItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View v, int position) {
-//                        //TODO:
-//                        // do something on item click
-//                    }
-//                }));
-        rVHome.setAdapter(mCursorAdapter);
-//
+        rVHome.setAdapter(quotedApter);
+        ItemTouchHelper.Callback callback =
+                new SimpleItemTouchHelperCallback(quotedApter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(rVHome);
+        rVHome.addItemDecoration(new QuoteItemDecorator());
     }
 
 
@@ -180,7 +176,7 @@ public class HomeFragment extends Fragment {
             }
             case R.id.action_change_units: {
                 // this is for changing stock changes from percent value to dollar value
-                mCursorAdapter.updateShowPercent();
+                quotedApter.updateShowPercent();
                 return true;
             }
 
@@ -193,13 +189,46 @@ public class HomeFragment extends Fragment {
     public void loadData(EventUpdateData eventUpdateData) {
         if (eventUpdateData.getResult() == GcmNetworkManager.RESULT_SUCCESS) {
             try {
-                mCursorAdapter.setData(QuoteDaoAdapter.getAllQuote());
+                quotedApter.setData(QuoteDaoAdapter.getAllQuote());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    @Subscribe
+    public void onSnackbarMessageEvent(EventRemoveItem event) {
+        EventSnackBarMessage eventSnackBarMessage =
+                new EventSnackBarMessage("You remove the " + quotedApter.getItems().get(event.getPosition()).getSymbol() + " of your list",
+                        getView());
+        eventSnackBarMessage.setOnDetachedToWindowRunnable(
+                new Runnable[]{new Runnable() {
+                    public void run() {
+                        try {
+                            QuoteDaoAdapter.removeQuote(removeQuote);
+                            removeQuote = null;
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }});
+        eventSnackBarMessage.setActionLabel(getString(R.string.frg_home_undo));
+        eventSnackBarMessage.setActionDismiss(false);
+        eventSnackBarMessage.setEventListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quotedApter.getItems().add(removePosition, removeQuote);
+                quotedApter.notifyItemInserted(removePosition);
+                removeQuote = null;
+            }
+        });
+        eventSnackBarMessage.setActionLabelColor(getResources().getColor(R.color.material_green_700));
+        removeQuote = quotedApter.getItems().get(event.getPosition());
+        removePosition = event.getPosition();
+        quotedApter.getItems().remove(event.getPosition());
+        quotedApter.notifyItemRemoved(event.getPosition());
+        ((MainActivity) getActivity()).handleSnackBarMessageEvent(eventSnackBarMessage);
+    }
 
     public void networkToast() {
         BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage(getString(R.string.network_toast), getView()), getActivity());
