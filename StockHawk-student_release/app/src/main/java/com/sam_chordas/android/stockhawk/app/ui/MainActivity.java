@@ -1,6 +1,5 @@
 package com.sam_chordas.android.stockhawk.app.ui;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +12,8 @@ import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.base.BaseActivity;
 <<<<<<< Updated upstream:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/MainActivity.java
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
-import com.sam_chordas.android.stockhawk.app.model.Quote;
 import com.sam_chordas.android.stockhawk.app.ui.home.HomeFragment;
 =======
-import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessage;
 >>>>>>> Stashed changes:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/MyStocksActivity.java
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
 import com.sam_chordas.android.stockhawk.db.provider.Contract;
@@ -99,7 +96,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onSnackbarMessageEvent(EventSnackbarMessage event) {
+    public void onSnackbarMessageEvent(EventSnackBarMessage event) {
         handleSnackBarMessageEvent(event);
     }
 
