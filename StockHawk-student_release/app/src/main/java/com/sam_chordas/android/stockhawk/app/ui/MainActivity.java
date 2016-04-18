@@ -1,7 +1,10 @@
 package com.sam_chordas.android.stockhawk.app.ui;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.PeriodicTask;
@@ -9,30 +12,49 @@ import com.google.android.gms.gcm.Task;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.base.BaseActivity;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
+import com.sam_chordas.android.stockhawk.app.model.Quote;
+import com.sam_chordas.android.stockhawk.app.ui.home.HomeFragment;
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
+import com.sam_chordas.android.stockhawk.db.provider.Contract;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
 import com.squareup.otto.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MyStocksActivity extends BaseActivity {
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    EventSnackBarMessage eventSnackBarMessage;
+    private boolean screamWithToPages;
+
+    public EventSnackBarMessage getEventSnackBarMessage() {
+        return eventSnackBarMessage;
+    }
+
+    public void setEventSnackBarMessage(EventSnackBarMessage eventSnackBarMessage) {
+        this.eventSnackBarMessage = eventSnackBarMessage;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_stocks);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+        if (findViewById(R.id.container_detail) != null) {
+            screamWithToPages = true;
+        }
         if (savedInstanceState != null) {
             navigateMainContent(getSupportFragmentManager().getFragment(
                     savedInstanceState, "mContent"), getString(R.string.app_name));
         } else {
             navigateMainContent(HomeFragment.newInstance(), getString(R.string.app_name));
         }
+
+       eventSnackBarMessage = new EventSnackBarMessage(getWindow().getDecorView().getRootView());
 
 //        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mCursorAdapter);
 //        mItemTouchHelper = new ItemTouchHelper(callback);
@@ -58,6 +80,18 @@ public class MyStocksActivity extends BaseActivity {
             // are updated.
             GcmNetworkManager.getInstance(this).schedule(periodicTask);
         }
+
+        Cursor c = getContentResolver().query(Contract.Quote.contentUri, null, null, null, null);
+        while(c.moveToNext())
+        {
+            for (int i = 0; i < c.getColumnCount(); i++)
+            {
+                Log.d(getClass().getSimpleName(), c.getColumnName(i) + " : " + c.getString(i));
+            }
+        }
+        c.close();
+
+
     }
 
     @Subscribe
@@ -69,6 +103,10 @@ public class MyStocksActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         getSupportFragmentManager().putFragment(outState, "mContent", getSupportFragmentManager().findFragmentById(R.id.container));
+    }
+
+    public boolean isScreamWithToPages() {
+        return screamWithToPages;
     }
 
 }
