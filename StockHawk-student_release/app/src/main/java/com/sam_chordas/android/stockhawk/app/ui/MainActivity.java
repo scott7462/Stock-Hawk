@@ -11,9 +11,13 @@ import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.base.BaseActivity;
+<<<<<<< Updated upstream:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/MainActivity.java
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
 import com.sam_chordas.android.stockhawk.app.ui.home.HomeFragment;
+=======
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessage;
+>>>>>>> Stashed changes:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/MyStocksActivity.java
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
 import com.sam_chordas.android.stockhawk.db.provider.Contract;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
@@ -95,7 +99,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onSnackbarMessageEvent(EventSnackBarMessage event) {
+    public void onSnackbarMessageEvent(EventSnackbarMessage event) {
         handleSnackBarMessageEvent(event);
     }
 

@@ -20,8 +20,12 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.busevents.BusProvider;
+<<<<<<< Updated upstream:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/home/HomeFragment.java
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventRemoveItem;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
+=======
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessage;
+>>>>>>> Stashed changes:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/HomeFragment.java
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventUpdateData;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
 import com.sam_chordas.android.stockhawk.app.ui.MainActivity;
@@ -68,7 +72,11 @@ public class HomeFragment extends Fragment {
                             try {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
+<<<<<<< Updated upstream:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/home/HomeFragment.java
                                     BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage("This stock is already saved!", getView()), getActivity());
+=======
+                                    BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage("This stock is already saved!",getView()), getActivity());
+>>>>>>> Stashed changes:StockHawk-student_release/app/src/main/java/com/sam_chordas/android/stockhawk/app/ui/HomeFragment.java
                                     return;
                                 } else {
                                     mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.ADD.toString());
@@ -231,7 +239,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void networkToast() {
-        BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage(getString(R.string.network_toast), getView()), getActivity());
+        BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage(getString(R.string.network_toast), getView()), getActivity());
     }
 
 

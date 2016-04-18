@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.sam_chordas.android.stockhawk.R;
-import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessage;
 
 import java.util.ArrayList;
 
@@ -109,16 +109,21 @@ public class BaseActivity extends AppCompatActivity {
         updateActionBarTitle();
     }
 
-    public void handleSnackBarMessageEvent(final EventSnackBarMessage event) {
+    public void handleSnackBarMessageEvent(final EventSnackbarMessage event) {
         this.clearKeyboardFromScreen();
+<<<<<<< Updated upstream
         final Snackbar snackBar = Snackbar.make(event.getView(),event.getText(), Snackbar.LENGTH_LONG);
         if(event.getActionLabelColor() != 0) {
+=======
+        final Snackbar snackBar = Snackbar.make(event.getView(), event.getText(), Snackbar.LENGTH_LONG);
+        if (event.getActionLabelColor() != 0) {
+>>>>>>> Stashed changes
             snackBar.setActionTextColor(-1);
         }
 
-        TextView tv = (TextView)snackBar.getView().findViewById(event.getTextId());
-        if(event.getTextColor() != 0) {
-            if(tv == null) {
+        TextView tv = (TextView) snackBar.getView().findViewById(event.getTextId());
+        if (event.getTextColor() != 0) {
+            if (tv == null) {
                 Log.i(TAG, this.getString(R.string.base_activity_snack_bar_missing_id_error));
             } else {
                 tv.setTextColor(event.getTextColor());
@@ -128,7 +133,7 @@ public class BaseActivity extends AppCompatActivity {
         snackBar.setCallback(new Snackbar.Callback() {
             public void onDismissed(Snackbar snackbar, int eventCode) {
                 super.onDismissed(snackbar, eventCode);
-                if(event.getOnDetachedToWindowRunnable() != null && event.getOnDetachedToWindowRunnable()[0] != null) {
+                if (event.getOnDetachedToWindowRunnable() != null && event.getOnDetachedToWindowRunnable()[0] != null) {
                     event.getOnDetachedToWindowRunnable()[0].run();
                 }
 
@@ -136,17 +141,17 @@ public class BaseActivity extends AppCompatActivity {
 
             public void onShown(Snackbar snackbar) {
                 super.onShown(snackbar);
-                if(event.getOnAttachedToWindowRunnable() != null && event.getOnAttachedToWindowRunnable()[0] != null) {
+                if (event.getOnAttachedToWindowRunnable() != null && event.getOnAttachedToWindowRunnable()[0] != null) {
                     event.getOnAttachedToWindowRunnable()[0].run();
                 }
 
             }
         });
-        if(event.isCentered()) {
+        if (event.isCentered()) {
             tv.setGravity(1);
         }
 
-        if(event.isActionDismiss()) {
+        if (event.isActionDismiss()) {
             snackBar.setAction(event.getActionLabel(), new android.view.View.OnClickListener() {
                 public void onClick(View v) {
                     snackBar.dismiss();
@@ -159,11 +164,10 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void clearKeyboardFromScreen() {
-        if(this.getWindow().getCurrentFocus() != null) {
-            InputMethodManager imm = (InputMethodManager)this.getSystemService(INPUT_METHOD_SERVICE);
+        if (this.getWindow().getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(this.getWindow().getCurrentFocus().getWindowToken(), 0);
         }
-
     }
 
 }
