@@ -8,4 +8,5 @@
     <string name="url_query_evn">env</string>
     <string name="url_query_evn_value">store://datatables.org/alltableswithkeys</string>
     <string name="url_basic_sql_query_to_service">select * from yahoo.finance.quotes where symbol in (</string>
+    <string name="url_basic_sql_query_to_service_history">select * from yahoo.finance.historicaldata where symbol in (</string>
 </resources>

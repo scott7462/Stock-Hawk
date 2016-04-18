@@ -1,12 +1,22 @@
 <resources>
-  <!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 
-  <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
-         https://developer.android.com/design/patterns/navigation-drawer.html -->
-  <dimen name="navigation_drawer_width">240dp</dimen>
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+           https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
 
-  <dimen name="widget_default_height">110dp</dimen>
-  <dimen name="widget_default_width">110dp</dimen>
+    <dimen name="widget_default_height">110dp</dimen>
+    <dimen name="widget_default_width">110dp</dimen>
+
+
+    <dimen name="default_extra_small_size">2dp</dimen>
+    <dimen name="default_large_size">16dp</dimen>
+    <dimen name="default_medium_size">8dp</dimen>
+    <dimen name="default_small_size">4dp</dimen>
+    <dimen name="radios_cards">4dp</dimen>
+    <dimen name="frg_home_height_quote_items">72dp</dimen>
+
+
 </resources>
