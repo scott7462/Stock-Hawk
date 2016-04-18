@@ -1,5 +1,6 @@
 package com.sam_chordas.android.stockhawk.db;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -30,11 +31,15 @@ import java.sql.SQLException;
 public class DBQLiteHelper extends OrmLiteSqliteOpenHelper {
 
     public static final String DATABASE_EXTERNAL_NAME = "quote.db";
-    private static final int DATABASE_EXTERNAL_VERSION = 1;
+    public static final int DATABASE_EXTERNAL_VERSION = 1;
     private Dao<Quote, Integer> quoteDao;
 
     public DBQLiteHelper() {
         super(App.getGlobalContext(), DATABASE_EXTERNAL_NAME, null, DATABASE_EXTERNAL_VERSION);
+    }
+
+    public DBQLiteHelper(Context context) {
+        super(context, DATABASE_EXTERNAL_NAME, null, DATABASE_EXTERNAL_VERSION);
     }
 
     @Override
