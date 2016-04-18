@@ -4,7 +4,6 @@ package com.sam_chordas.android.stockhawk.app;
 import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
-import com.facebook.stetho.Stetho;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.db.DBQLiteHelper;
 import com.sam_chordas.android.stockhawk.app.retofit.RestClientPublic;
@@ -41,9 +40,6 @@ public class App extends MultiDexApplication {
         restClientPublic = new RestClientPublic(getString(R.string.base_url));
     }
 
-    private void stetho() {
-        Stetho.initializeWithDefaults(this);
-    }
     /**
      * get the Instance of the rest client to call web services.
      */
