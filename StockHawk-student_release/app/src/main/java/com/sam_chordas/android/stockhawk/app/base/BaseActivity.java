@@ -111,7 +111,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void handleSnackBarMessageEvent(final EventSnackBarMessage event) {
         this.clearKeyboardFromScreen();
-        final Snackbar snackBar = Snackbar.make(event.getView(),event.getText(), 0);
+        final Snackbar snackBar = Snackbar.make(event.getView(),event.getText(), Snackbar.LENGTH_LONG);
         if(event.getActionLabelColor() != 0) {
             snackBar.setActionTextColor(-1);
         }
