@@ -2,6 +2,7 @@ package com.sam_chordas.android.stockhawk.app.retofit;
 
 
 import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuote;
+import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuoteHistory;
 import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuotes;
 
 import retrofit.Call;
@@ -31,4 +32,8 @@ public interface ApiService {
 
     @GET("yql")
     Call<ResponseQuotes> getQuotes(@Query("q") String q);
+
+
+    @GET("yql")
+    Call<ResponseQuoteHistory> getQuoteHistory(@Query("q") String q);
 }

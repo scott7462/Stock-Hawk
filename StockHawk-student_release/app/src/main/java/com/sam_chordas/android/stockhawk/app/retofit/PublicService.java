@@ -2,6 +2,7 @@ package com.sam_chordas.android.stockhawk.app.retofit;
 
 
 import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuote;
+import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuoteHistory;
 import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuotes;
 
 import retrofit.Call;
@@ -33,6 +34,10 @@ public class PublicService {
         return apiService.getQuote(q);
     }
 
+
+    public Call<ResponseQuoteHistory> getQuoteHistory(String q) {
+        return apiService.getQuoteHistory(q);
+    }
 
     public Call<ResponseQuotes> getQuotes(String q) {
         return apiService.getQuotes(q);
