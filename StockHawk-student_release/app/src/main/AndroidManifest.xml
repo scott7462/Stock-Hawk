@@ -18,8 +18,9 @@
             android:protectionLevel="signature" />
 
         <uses-permission android:name="com.google.android.gcm.demo.permission.C2D_MESSAGE" />
+
         <activity
-            android:name=".app.ui.MyStocksActivity"
+            android:name=".app.ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,6 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".app.ui.details.DetailActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".service.StockTaskService"
@@ -39,25 +45,26 @@
         </service>
         <service android:name=".service.StockIntentService" />
 
-        <!--<provider-->
-            <!--android:name="com.sam_chordas.android.stockhawk.data.generated.QuoteProvider"-->
-            <!--android:authorities="com.sam_chordas.android.stockhawk.data.QuoteProvider"-->
-            <!--android:exported="false" />-->
-        <!--<receiver-->
-            <!--android:name=".widget.QuoteWidgetProvider"-->
-            <!--android:label="@string/widget_title">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
-            <!--</intent-filter>-->
-            <!--<meta-data-->
-                <!--android:name="android.appwidget.provider"-->
-                <!--android:resource="@xml/widget_info" />-->
-        <!--</receiver>-->
+        <provider
+            android:name=".db.provider.DBProvider"
+            android:authorities="com.sam_chordas.android.stockhawk.app.model.Quote"
+            android:exported="false" />
+
+        <receiver
+            android:name=".widget.QuoteWidgetProvider"
+            android:label="@string/widget_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
 
         <!--<service-->
-            <!--android:name=".widget.QuoteWidgetRemoteViewsService"-->
-            <!--android:exported="false"-->
-            <!--android:permission="android.permission.BIND_REMOTEVIEWS" />-->
+        <!--android:name=".widget.QuoteWidgetRemoteViewsService"-->
+        <!--android:exported="false"-->
+        <!--android:permission="android.permission.BIND_REMOTEVIEWS" />-->
     </application>
 
 </manifest>
