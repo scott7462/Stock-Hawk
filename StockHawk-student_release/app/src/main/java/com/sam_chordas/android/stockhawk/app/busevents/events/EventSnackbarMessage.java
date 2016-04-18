@@ -24,6 +24,14 @@ public class EventSnackBarMessage {
         this.view = view;
     }
 
+    public EventSnackBarMessage(View view) {
+        this.view = view;
+    }
+
+    public EventSnackBarMessage(String text) {
+        this.text = text;
+    }
+
     public View getView() {
         return view;
     }
