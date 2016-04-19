@@ -79,17 +79,6 @@ public class MainActivity extends BaseActivity {
             GcmNetworkManager.getInstance(this).schedule(periodicTask);
         }
 
-        Cursor c = getContentResolver().query(Contract.Quote.contentUri, null, null, null, null);
-        while(c.moveToNext())
-        {
-            for (int i = 0; i < c.getColumnCount(); i++)
-            {
-                Log.d(getClass().getSimpleName(), c.getColumnName(i) + " : " + c.getString(i));
-            }
-        }
-        c.close();
-
-
     }
 
     @Subscribe

@@ -1,11 +1,12 @@
 package com.sam_chordas.android.stockhawk.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.content.Intent;
+import android.net.Uri;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.sam_chordas.android.stockhawk.R;
 
@@ -16,10 +17,37 @@ public class QuoteWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        // update each of the widgets with the remote adapter
+        for (int i = 0; i < appWidgetIds.length; ++i) {
+            RemoteViews remoteViews = updateWidgetListView(context,
+                    appWidgetIds[i]);
+            appWidgetManager.updateAppWidget(appWidgetIds[i],
+                    remoteViews);
+        }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_collection);
-        // find your TextView here by id here and update it.
-
     }
+
+
+    private RemoteViews updateWidgetListView(Context context,int appWidgetId) {
+
+        //which layout to show on widget
+        RemoteViews remoteViews = new RemoteViews(
+                context.getPackageName(), R.layout.widget_collection);
+
+        //RemoteViews Service needed to provide adapter for ListView
+        Intent svcIntent = new Intent(context, QuoteWidgetService.class);
+        //passing app widget id to that RemoteViews Service
+        svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        //setting a unique Uri to the intent
+        //don't know its purpose to me right now
+        svcIntent.setData(Uri.parse(
+                svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+        //setting adapter to listview of the widget
+        remoteViews.setRemoteAdapter(appWidgetId, R.id.listViewWidget,
+                svcIntent);
+        //setting an empty view in case of no data
+        remoteViews.setEmptyView(R.id.listViewWidget, R.id.empty_view);
+        return remoteViews;
+    }
+
 }

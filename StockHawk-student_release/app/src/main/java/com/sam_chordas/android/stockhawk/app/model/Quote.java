@@ -1,5 +1,6 @@
 package com.sam_chordas.android.stockhawk.app.model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -16,7 +17,7 @@ import com.tojc.ormlite.android.annotation.AdditionalAnnotation.DefaultContentUr
  */
 @DatabaseTable(tableName = Contract.Quote.TABLE_NAME)
 @DefaultContentUri(authority = Contract.AUTHORITY, path = Contract.Quote.CONTENT_URI_PATH)
-@DefaultContentMimeTypeVnd(name=Contract.Quote.MIMETYPE_NAME, type=Contract.Quote.MIMETYPE_TYPE)
+@DefaultContentMimeTypeVnd(name = Contract.Quote.MIMETYPE_NAME, type = Contract.Quote.MIMETYPE_TYPE)
 public class Quote implements Parcelable {
 
     private static final String FIELD_ID = "_id";
@@ -111,6 +112,8 @@ public class Quote implements Parcelable {
         this.percentChange = percentChange;
     }
 
+    public Quote() {
+    }
 
     @Override
     public int describeContents() {
@@ -128,7 +131,8 @@ public class Quote implements Parcelable {
         dest.writeString(this.percentChange);
     }
 
-    public Quote() {
+    public Quote(Cursor cursor) {
+        this.symbol = "Test";
     }
 
     protected Quote(Parcel in) {
