@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.sam_chordas.android.stockhawk.R;
+import com.sam_chordas.android.stockhawk.app.App;
 import com.sam_chordas.android.stockhawk.app.busevents.BusProvider;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventRemoveItem;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
