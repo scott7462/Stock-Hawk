@@ -1,9 +1,7 @@
 package com.sam_chordas.android.stockhawk.app.ui;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.PeriodicTask;
@@ -13,7 +11,6 @@ import com.sam_chordas.android.stockhawk.app.base.BaseActivity;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
 import com.sam_chordas.android.stockhawk.app.ui.home.HomeFragment;
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
-import com.sam_chordas.android.stockhawk.db.provider.Contract;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
 import com.squareup.otto.Subscribe;
 
@@ -51,17 +48,10 @@ public class MainActivity extends BaseActivity {
         } else {
             navigateMainContent(HomeFragment.newInstance(), getString(R.string.app_name));
         }
-
-       eventSnackBarMessage = new EventSnackBarMessage(getWindow().getDecorView().getRootView());
-
-//        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mCursorAdapter);
-//        mItemTouchHelper = new ItemTouchHelper(callback);
-//        mItemTouchHelper.attachToRecyclerView(recyclerView);
-//
-//        mTitle = getTitle();
+        eventSnackBarMessage = new EventSnackBarMessage(getWindow().getDecorView().getRootView());
         if (ConnectionUtils.isOnline(this)) {
             long period = 3600L;
-            long flex = 10L;
+            long flex = 1L;
             String periodicTag = StockTaskService.CALLS.PERIODIC.toString();
 
             // create a periodic task to pull stocks once every hour after the app has been opened. This

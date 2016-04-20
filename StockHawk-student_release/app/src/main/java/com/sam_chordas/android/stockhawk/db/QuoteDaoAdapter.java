@@ -3,6 +3,8 @@ package com.sam_chordas.android.stockhawk.db;
 import com.j256.ormlite.dao.Dao;
 import com.sam_chordas.android.stockhawk.app.App;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
+import com.sam_chordas.android.stockhawk.db.provider.Contract;
+import com.sam_chordas.android.stockhawk.widget.WidgetUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -72,7 +74,7 @@ public class QuoteDaoAdapter {
     public static boolean isQuote(String symbol) throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
         Dao<Quote, Integer> quotesDao = dbHelper.getQuoteDao();
-        List<Quote> quotes = quotesDao.queryBuilder().where().eq("symbol", symbol).query();
+        List<Quote> quotes = quotesDao.queryBuilder().where().eq(Contract.Quote.SYMBOL, symbol).query();
         return (quotes != null && quotes.size() > 0);
     }
 

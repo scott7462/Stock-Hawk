@@ -20,6 +20,7 @@ import com.sam_chordas.android.stockhawk.app.ui.details.DetailActivity;
 import com.sam_chordas.android.stockhawk.app.ui.details.DetailFragment;
 import com.sam_chordas.android.stockhawk.app.utils.SettingsUtils;
 import com.sam_chordas.android.stockhawk.db.QuoteDaoAdapter;
+import com.sam_chordas.android.stockhawk.widget.WidgetUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
             holder.tVStockSymbol.setText(quote.getSymbol());
             holder.tVBidPrice.setText(quote.getBid());
             int sdk = Build.VERSION.SDK_INT;
-            if (quote.getChange()!=null && quote.getChange().charAt(0) != '-') {
+            if (quote.getChange() != null && quote.getChange().charAt(0) != '-') {
                 if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
                     holder.tVChange.setBackgroundDrawable(
                             App.getGlobalContext().getResources().getDrawable(R.drawable.percent_change_pill_green));
@@ -148,6 +149,7 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
         notifyItemMoved(fromPosition, toPosition);
         try {
             QuoteDaoAdapter.updatePositions(items);
+            WidgetUtils.updateWidget();
         } catch (SQLException e) {
             e.printStackTrace();
         }

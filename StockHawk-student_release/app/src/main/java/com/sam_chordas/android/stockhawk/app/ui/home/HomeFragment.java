@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.sam_chordas.android.stockhawk.R;
-import com.sam_chordas.android.stockhawk.app.App;
 import com.sam_chordas.android.stockhawk.app.busevents.BusProvider;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventRemoveItem;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
@@ -29,10 +28,13 @@ import com.sam_chordas.android.stockhawk.app.ui.MainActivity;
 import com.sam_chordas.android.stockhawk.app.ui.home.adapter.AdapterQuote;
 import com.sam_chordas.android.stockhawk.app.ui.home.adapter.SimpleItemTouchHelperCallback;
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
+import com.sam_chordas.android.stockhawk.app.utils.SettingsUtils;
 import com.sam_chordas.android.stockhawk.app.utils.decoreitors.QuoteItemDecorator;
 import com.sam_chordas.android.stockhawk.db.QuoteDaoAdapter;
+import com.sam_chordas.android.stockhawk.db.provider.Contract;
 import com.sam_chordas.android.stockhawk.service.StockIntentService;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
+import com.sam_chordas.android.stockhawk.widget.WidgetUtils;
 import com.squareup.otto.Subscribe;
 
 import java.sql.SQLException;
@@ -49,7 +51,6 @@ public class HomeFragment extends Fragment {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
     private Intent mServiceIntent;
-    private ItemTouchHelper mItemTouchHelper;
     private AdapterQuote quotedApter;
     private Quote removeQuote;
     private int removePosition;
@@ -70,15 +71,14 @@ public class HomeFragment extends Fragment {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
                                     BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage("This stock is already saved!", getView()), getActivity());
-                                    return;
+
                                 } else {
                                     mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.ADD.toString());
-                                    mServiceIntent.putExtra(Quote.SYMBOL, input.toString());
+                                    mServiceIntent.putExtra(Contract.Quote.SYMBOL, input.toString());
                                     getActivity().startService(mServiceIntent);
                                 }
                             } catch (SQLException e) {
                                 e.printStackTrace();
-                                return;
                             }
                         }
                     }).show();
@@ -100,7 +100,6 @@ public class HomeFragment extends Fragment {
 
     private void initVars(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-
         if (savedInstanceState == null) {
             mServiceIntent = new Intent(getActivity(), StockIntentService.class);
             mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.INIT.toString());
@@ -126,6 +125,7 @@ public class HomeFragment extends Fragment {
     private void intViews() {
         rVHome.setLayoutManager(new LinearLayoutManager(getActivity()));
         try {
+            assert quotedApter != null;
             quotedApter.setData(QuoteDaoAdapter.getAllQuote());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -178,6 +178,7 @@ public class HomeFragment extends Fragment {
             case R.id.action_change_units: {
                 // this is for changing stock changes from percent value to dollar value
                 quotedApter.updateShowPercent();
+                WidgetUtils.updateWidget();
                 return true;
             }
 
@@ -191,6 +192,7 @@ public class HomeFragment extends Fragment {
         if (eventUpdateData.getResult() == GcmNetworkManager.RESULT_SUCCESS) {
             try {
                 quotedApter.setData(QuoteDaoAdapter.getAllQuote());
+                WidgetUtils.updateWidget();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -208,6 +210,8 @@ public class HomeFragment extends Fragment {
                         try {
                             QuoteDaoAdapter.removeQuote(removeQuote);
                             removeQuote = null;
+                            SettingsUtils.setPreferenceRemoveAll(QuoteDaoAdapter.getAllQuote().size()==0);
+                            WidgetUtils.updateWidget();
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
