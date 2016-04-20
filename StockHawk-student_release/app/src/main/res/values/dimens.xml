@@ -8,7 +8,7 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
 
     <dimen name="widget_default_height">110dp</dimen>
-    <dimen name="widget_default_width">275dp</dimen>
+    <dimen name="widget_default_width">220dp</dimen>
 
 
     <dimen name="default_extra_small_size">2dp</dimen>
@@ -17,6 +17,4 @@
     <dimen name="default_small_size">4dp</dimen>
     <dimen name="radios_cards">4dp</dimen>
     <dimen name="frg_home_height_quote_items">72dp</dimen>
-
-
 </resources>
