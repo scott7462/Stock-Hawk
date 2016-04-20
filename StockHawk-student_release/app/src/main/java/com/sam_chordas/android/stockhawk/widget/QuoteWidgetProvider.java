@@ -1,6 +1,5 @@
 package com.sam_chordas.android.stockhawk.widget;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -28,24 +27,15 @@ public class QuoteWidgetProvider extends AppWidgetProvider {
     }
 
 
-    private RemoteViews updateWidgetListView(Context context,int appWidgetId) {
-
-        //which layout to show on widget
+    private RemoteViews updateWidgetListView(Context context, int appWidgetId) {
         RemoteViews remoteViews = new RemoteViews(
                 context.getPackageName(), R.layout.widget_collection);
-
-        //RemoteViews Service needed to provide adapter for ListView
         Intent svcIntent = new Intent(context, QuoteWidgetService.class);
-        //passing app widget id to that RemoteViews Service
         svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        //setting a unique Uri to the intent
-        //don't know its purpose to me right now
         svcIntent.setData(Uri.parse(
                 svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
-        //setting adapter to listview of the widget
-        remoteViews.setRemoteAdapter(appWidgetId, R.id.listViewWidget,
+        remoteViews.setRemoteAdapter(R.id.listViewWidget,
                 svcIntent);
-        //setting an empty view in case of no data
         remoteViews.setEmptyView(R.id.listViewWidget, R.id.empty_view);
         return remoteViews;
     }

@@ -1,16 +1,17 @@
 package com.sam_chordas.android.stockhawk.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
+import com.sam_chordas.android.stockhawk.app.ui.MainActivity;
+import com.sam_chordas.android.stockhawk.app.utils.SettingsUtils;
 import com.sam_chordas.android.stockhawk.db.provider.Contract;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
  * Created by android4 on 4/19/16.
  */
 public class QuoteRemoteViewsFactory implements RemoteViewsFactory {
+    private static final String TAG = QuoteRemoteViewsFactory.class.getSimpleName();
     private List<Quote> items = new ArrayList<Quote>();
     private Context mContext;
     private int mAppWidgetId;
@@ -30,17 +32,12 @@ public class QuoteRemoteViewsFactory implements RemoteViewsFactory {
                 AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
-    public void onCreate() {
-        // In onCreate() you setup any connections / cursors to your data source. Heavy lifting,
-        // for example downloading or creating content etc, should be deferred to onDataSetChanged()
-        // or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
+    private void updateData() {
+        items.clear();
         Cursor c = mContext.getContentResolver().query(Contract.Quote.contentUri, null, null, null, null);
         assert c != null;
         while (c.moveToNext()) {
-            for (int i = 0; i < c.getColumnCount(); i++) {
-                items.add(new Quote(c));
-                Log.d(getClass().getSimpleName(), c.getColumnName(i) + " : " + c.getString(i));
-            }
+            items.add(Quote.CursorQuote(c));
         }
         c.close();
     }
@@ -54,33 +51,28 @@ public class QuoteRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     public RemoteViews getViewAt(int position) {
-        // position will always range from 0 to getCount() - 1.
-
-        // We construct a remote views item based on our widget item xml file, and set the
-        // text based on the position.
+        Quote quote = items.get(position);
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_collection_item);
-        rv.setTextViewText(R.id.widget_item, items.get(position).getSymbol());
+        rv.setTextViewText(R.id.tVStockSymbol, quote.getSymbol());
+        rv.setTextViewText(R.id.tVBidPrice, items.get(position).getBid());
+        if (quote.getChange() != null && quote.getChange().charAt(0) != '-') {
+            rv.setInt(R.id.tVChange, "setBackgroundResource", R.drawable.percent_change_pill_green);
+        } else {
+            rv.setInt(R.id.tVChange, "setBackgroundResource", R.drawable.percent_change_pill_red);
+        }
+        if (SettingsUtils.getPreferenceShowPercent()) {
+            rv.setTextViewText(R.id.tVChange, quote.getPercentChange());
+        } else {
+            rv.setTextViewText(R.id.tVChange, quote.getChange());
+        }
 
-        // Next, we set a fill-intent which will be used to fill-in the pending intent template
-        // which is set on the collection view in StackWidgetProvider.
-//        Bundle extras = new Bundle();
-//        extras.putInt(QuoteWidgetProvider.EXTRA_ITEM, position);
-//        Intent fillInIntent = new Intent();
-//        fillInIntent.putExtras(extras);
-//        rv.setOnClickFillInIntent(R.id.widget_item, fillInIntent);
-
-        // You can do heaving lifting in here, synchronously. For example, if you need to
-        // process an image, fetch something from the network, etc., it is ok to do it here,
-        // synchronously. A loading view will show up in lieu of the actual contents in the
-        // interim.
-
-        // Return the remote views object.
+        Intent intent = new Intent(mContext, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+        rv.setOnClickPendingIntent(R.id.lLWidget, pendingIntent);
         return rv;
     }
 
     public RemoteViews getLoadingView() {
-        // You can create a custom loading view (for instance when getViewAt() is slow.) If you
-        // return null here, you will get the default loading view.
         return null;
     }
 
@@ -96,12 +88,12 @@ public class QuoteRemoteViewsFactory implements RemoteViewsFactory {
         return true;
     }
 
+    @Override
+    public void onCreate() {
+        updateData();
+    }
+
     public void onDataSetChanged() {
-        // This is triggered when you call AppWidgetManager notifyAppWidgetViewDataChanged
-        // on the collection view corresponding to this factory. You can do heaving lifting in
-        // here, synchronously. For example, if you need to process an image, fetch something
-        // from the network, etc., it is ok to do it here, synchronously. The widget will remain
-        // in its current state while work is being done here, so you don't need to worry about
-        // locking up the widget.
+        updateData();
     }
 }
