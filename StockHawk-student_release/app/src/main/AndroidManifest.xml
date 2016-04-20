@@ -48,7 +48,7 @@
         <provider
             android:name=".db.provider.DBProvider"
             android:authorities="com.sam_chordas.android.stockhawk.app.model.Quote"
-            android:exported="false" />
+            android:exported="true" />
 
         <receiver android:name=".widget.QuoteWidgetProvider">
             <intent-filter>
@@ -61,7 +61,7 @@
 
         <service
             android:name=".widget.QuoteWidgetService"
-            android:exported="false"
+            android:exported="true"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
