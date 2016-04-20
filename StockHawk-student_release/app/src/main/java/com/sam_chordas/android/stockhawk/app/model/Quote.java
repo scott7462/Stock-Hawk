@@ -131,8 +131,38 @@ public class Quote implements Parcelable {
         dest.writeString(this.percentChange);
     }
 
-    public Quote(Cursor cursor) {
-        this.symbol = "Test";
+    public Quote(int id, String symbol, String bid, String change, String open, String name, String percentChange) {
+        this.id = id;
+        this.symbol = symbol;
+        this.bid = bid;
+        this.change = change;
+        this.open = open;
+        this.name = name;
+        this.percentChange = percentChange;
+    }
+
+    public static Quote CursorQuote(Cursor cursor) {
+        try {
+            int idIndex = cursor.getColumnIndexOrThrow(FIELD_ID);
+            int symbolIndex = cursor.getColumnIndexOrThrow(Contract.Quote.SYMBOL);
+            int bidIndex = cursor.getColumnIndexOrThrow(Contract.Quote.BID);
+            int changeIndex = cursor.getColumnIndexOrThrow(Contract.Quote.CHANGE);
+            int nameIndex = cursor.getColumnIndexOrThrow(Contract.Quote.NAME);
+            int openIndex = cursor.getColumnIndexOrThrow(Contract.Quote.OPEN);
+            int percentChangeIndex = cursor.getColumnIndexOrThrow(Contract.Quote.PERCENT_CHANGE);
+            return new Quote(cursor.getInt(idIndex),
+                    cursor.getString(symbolIndex),
+                    cursor.getString(bidIndex),
+                    cursor.getString(changeIndex),
+                    cursor.getString(nameIndex),
+                    cursor.getString(openIndex),
+                    cursor.getString(percentChangeIndex));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     protected Quote(Parcel in) {
