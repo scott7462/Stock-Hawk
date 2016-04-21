@@ -196,6 +196,9 @@ public class HomeFragment extends Fragment {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }else{
+            EventSnackBarMessage eventSnackBarMessage = new EventSnackBarMessage("We cant fid ",getView());
+            ((MainActivity)getActivity()).handleSnackBarMessageEvent(eventSnackBarMessage);
         }
     }
 

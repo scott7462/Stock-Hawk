@@ -125,7 +125,7 @@ public class StockTaskService extends GcmTaskService {
                 e.printStackTrace();
             }
         }
-        BusProvider.getInstance().postOnNonUIThread(new EventUpdateData(result));
+        BusProvider.getInstance().postOnNonUIThread(new EventUpdateData(result,params.getTag()));
         return result;
     }
 
