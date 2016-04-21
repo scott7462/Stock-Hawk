@@ -11,6 +11,7 @@ import com.sam_chordas.android.stockhawk.app.model.Quote;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 /**
  * Copyright (C) 2015 The Android Open Source Project
  * <p/>
@@ -56,7 +57,10 @@ public class DetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         if (getIntent() != null && getIntent().getExtras().containsKey(Quote.QUOTE)) {
-            navigateMainContent(DetailFragment.newInstance((Quote) getIntent().getExtras().getParcelable(Quote.QUOTE)), getString(R.string.app_name));
+            assert ((Quote) getIntent().getExtras().getParcelable(Quote.QUOTE)) != null;
+            navigateMainContent(
+                    DetailFragment.newInstance((Quote) getIntent().getExtras().getParcelable(Quote.QUOTE)),
+                    ((Quote) getIntent().getExtras().getParcelable(Quote.QUOTE)).getName());
         }
     }
 }

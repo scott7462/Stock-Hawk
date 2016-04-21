@@ -17,4 +17,5 @@
     <string name="base_activity_snack_bar_missing_id_error">Error</string>
     <string name="frg_home_undo">undo</string>
     <string name="roboto_light_ttf">fonts/Roboto-Light.ttf</string>
+    <string name="frg_details_entry_data">You need to provide data for the chart.</string>
 </resources>

@@ -10,13 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.Utils;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.App;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
@@ -55,6 +55,8 @@ public class DetailFragment extends Fragment {
     private static final String TAG = DetailFragment.class.getSimpleName();
     @Bind(R.id.cBFrgDetail)
     LineChart cBFrgDetail;
+    @Bind(R.id.eLFrgDetailsLoading)
+    RelativeLayout eLFrgDetailsLoading;
 
     private Quote quote;
     private ArrayList<QuoteHistory> quotes = new ArrayList<QuoteHistory>();
@@ -97,13 +99,13 @@ public class DetailFragment extends Fragment {
                 .enqueue(new Callback<ResponseQuoteHistory>() {
                     @Override
                     public void onResponse(Response<ResponseQuoteHistory> response, Retrofit retrofit) {
-//                        try {
-//                            adapterDetail.setTrailers(response.body().getResults());
-//                        } catch (NullPointerException e) {
-//
-//                        }
+                        if (eLFrgDetailsLoading != null) {
+                            eLFrgDetailsLoading.setVisibility(View.GONE);
+                            cBFrgDetail.invalidate();
+                        }
                         quotes = response.body().getQuery().getResults().getQuote();
-                        setData();
+                        setData(45, 100);
+
                         Timber.e(TAG, response.toString());
                     }
 
@@ -124,126 +126,49 @@ public class DetailFragment extends Fragment {
         return view;
     }
 
-    private void setData() {
+    private void setData(int count, float range) {
         ArrayList<String> xVals = new ArrayList<String>();
         ArrayList<Entry> yVals = new ArrayList<Entry>();
-        for (int i = 0; i < quotes.size(); i++) {
+        for (int i = 0; i < count; i++) {
             xVals.add(quotes.get(i).getDate());
             float val = Float.valueOf(quotes.get(i).getClose());
             yVals.add(new Entry(val, i));
         }
-
         LineDataSet set;
 
         if (cBFrgDetail.getData() != null &&
                 cBFrgDetail.getData().getDataSetCount() > 0) {
             set = (LineDataSet) cBFrgDetail.getData().getDataSetByIndex(0);
-//            set.setYVals(yVals);
-//            cBFrgDetail.getData().setXVals(xVals);
             cBFrgDetail.notifyDataSetChanged();
         } else {
-            // create a dataset and give it a type
-            set = new LineDataSet(yVals, "DataSet 1");
-
-            // set1.setFillAlpha(110);
-            // set1.setFillColor(Color.RED);
-
-            // set the line to be drawn like this "- - - - - -"
+            set = new LineDataSet(yVals, quote.getName());
             set.enableDashedLine(10f, 5f, 0f);
             set.enableDashedHighlightLine(10f, 5f, 0f);
-            set.setColor(Color.BLACK);
-            set.setCircleColor(Color.BLACK);
+            set.setColor(R.color.material_blue_700);
+            set.setCircleColor(R.color.material_blue_500);
             set.setLineWidth(1f);
             set.setCircleRadius(3f);
             set.setDrawCircleHole(false);
             set.setValueTextSize(9f);
             set.setDrawFilled(true);
+            set.setFillColor(R.color.material_green_700);
 
-            if (Utils.getSDKInt() >= 18) {
-                // fill drawable only supported on api level 18 and above
-//                Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
-//                set.setFillDrawable(drawable);
-            } else {
-                set.setFillColor(Color.BLACK);
-            }
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-            dataSets.add(set); // add the datasets
-            // create a data object with the datasets
+            dataSets.add(set);
             LineData data = new LineData(xVals, dataSets);
-            // set data
             cBFrgDetail.setData(data);
             cBFrgDetail.invalidate();
         }
 
-
     }
+
 
     private void intViews() {
         cBFrgDetail.setDrawGridBackground(false);
-
         cBFrgDetail.setDescription("");
-        cBFrgDetail.setNoDataTextDescription("You need to provide data for the chart.");
-
+        cBFrgDetail.setNoDataTextDescription(getString(R.string.frg_details_entry_data));
         cBFrgDetail.setBackgroundColor(Color.WHITE);
-
-//        LimitLine llXAxis = new LimitLine(10f, "Index 10");
-//        llXAxis.setLineWidth(4f);
-//        llXAxis.enableDashedLine(10f, 10f, 0f);
-//        llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-//        llXAxis.setTextSize(10f);
-//
-//        XAxis xAxis = cBFrgDetail.getXAxis();
-//        //xAxis.setValueFormatter(new MyCustomXAxisValueFormatter());
-//        //xAxis.addLimitLine(llXAxis); // add x-axis limit line
-//
-//
-//        LimitLine ll1 = new LimitLine(130f, "Upper Limit");
-//        ll1.setLineWidth(4f);
-//        ll1.enableDashedLine(10f, 10f, 0f);
-//        ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-//        ll1.setTextSize(10f);
-//
-//        LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
-//        ll2.setLineWidth(4f);
-//        ll2.enableDashedLine(10f, 10f, 0f);
-//        ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-//        ll2.setTextSize(10f);
-//
-//        YAxis leftAxis = cBFrgDetail.getAxisLeft();
-//        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-//        leftAxis.addLimitLine(ll1);
-//        leftAxis.addLimitLine(ll2);
-//        leftAxis.setAxisMaxValue(220f);
-//        leftAxis.setAxisMinValue(-50f);
-//        //leftAxis.setYOffset(20f);
-//        leftAxis.enableGridDashedLine(10f, 10f, 0f);
-//        leftAxis.setDrawZeroLine(false);
-//
-//        // limit lines are drawn behind data (and not on top)
-//        leftAxis.setDrawLimitLinesBehindData(true);
-//
-//        cBFrgDetail.getAxisRight().setEnabled(false);
-//
-//        //mChart.getViewPortHandler().setMaximumScaleY(2f);
-//        //mChart.getViewPortHandler().setMaximumScaleX(2f);
-//
-//
-////        mChart.setVisibleXRange(20);
-////        mChart.setVisibleYRange(20f, AxisDependency.LEFT);
-////        mChart.centerViewTo(20, 50, AxisDependency.LEFT);
-//
-//        cBFrgDetail.animateX(2500, Easing.EasingOption.EaseInOutQuart);
-////        mChart.invalidate();
-//
-//        // get the legend (only possible after setting data)
-//        Legend l = cBFrgDetail.getLegend();
-//
-//        // modify the legend ...
-//        // l.setPosition(LegendPosition.LEFT_OF_CHART);
-//        l.setForm(Legend.LegendForm.LINE);
-
-
     }
 
     @Override
