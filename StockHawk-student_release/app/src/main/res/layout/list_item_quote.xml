@@ -13,8 +13,8 @@
         android:layout_height="@dimen/frg_home_height_quote_items"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingLeft="@dimen/padding_item_quote"
+        android:paddingRight="@dimen/padding_item_quote">
 
         <TextView
             android:id="@+id/tVStockSymbol"
@@ -34,7 +34,7 @@
                 style="@style/BidPriceTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="10sp" />
+                android:paddingRight="@dimen/default_medium_size" />
 
             <TextView
                 android:id="@+id/tVChange"
@@ -42,8 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/percent_change_pill"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp" />
+                android:paddingLeft="@dimen/default_small_size"
+                android:paddingRight="@dimen/default_small_size" />
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

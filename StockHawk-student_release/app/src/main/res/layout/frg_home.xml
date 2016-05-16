@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
+        android:contentDescription="@string/description_add_stock"
         android:src="@drawable/ic_add_white_24dp"
         app:layout_anchor="@id/rVHome"
         app:layout_anchorGravity="bottom|right|end" />
