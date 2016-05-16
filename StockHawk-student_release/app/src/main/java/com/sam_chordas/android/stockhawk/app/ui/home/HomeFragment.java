@@ -21,7 +21,7 @@ import com.google.android.gms.gcm.GcmNetworkManager;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.busevents.BusProvider;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventRemoveItem;
-import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessage;
 import com.sam_chordas.android.stockhawk.app.busevents.events.EventUpdateData;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
 import com.sam_chordas.android.stockhawk.app.ui.MainActivity;
@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
                             try {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
-                                    BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage("This stock is already saved!", getView()), getActivity());
+                                    BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage("This stock is already saved!", getView()), getActivity());
 
                                 } else {
                                     mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.ADD.toString());
@@ -197,17 +197,17 @@ public class HomeFragment extends Fragment {
                 e.printStackTrace();
             }
         }else{
-            EventSnackBarMessage eventSnackBarMessage = new EventSnackBarMessage("We cant fid ",getView());
-            ((MainActivity)getActivity()).handleSnackBarMessageEvent(eventSnackBarMessage);
+            EventSnackbarMessage eventSnackbarMessage = new EventSnackbarMessage("We cant fid ",getView());
+            ((MainActivity)getActivity()).handleSnackBarMessageEvent(eventSnackbarMessage);
         }
     }
 
     @Subscribe
     public void onSnackbarMessageEvent(EventRemoveItem event) {
-        EventSnackBarMessage eventSnackBarMessage =
-                new EventSnackBarMessage("You remove the " + quotedApter.getItems().get(event.getPosition()).getSymbol() + " of your list",
+        EventSnackbarMessage eventSnackbarMessage =
+                new EventSnackbarMessage("You remove the " + quotedApter.getItems().get(event.getPosition()).getSymbol() + " of your list",
                         getView());
-        eventSnackBarMessage.setOnDetachedToWindowRunnable(
+        eventSnackbarMessage.setOnDetachedToWindowRunnable(
                 new Runnable[]{new Runnable() {
                     public void run() {
                         try {
@@ -220,9 +220,9 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 }});
-        eventSnackBarMessage.setActionLabel(getString(R.string.frg_home_undo));
-        eventSnackBarMessage.setActionDismiss(false);
-        eventSnackBarMessage.setEventListener(new View.OnClickListener() {
+        eventSnackbarMessage.setActionLabel(getString(R.string.frg_home_undo));
+        eventSnackbarMessage.setActionDismiss(false);
+        eventSnackbarMessage.setEventListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 quotedApter.getItems().add(removePosition, removeQuote);
@@ -230,16 +230,16 @@ public class HomeFragment extends Fragment {
                 removeQuote = null;
             }
         });
-        eventSnackBarMessage.setActionLabelColor(getResources().getColor(R.color.material_green_700));
+        eventSnackbarMessage.setActionLabelColor(getResources().getColor(R.color.material_green_700));
         removeQuote = quotedApter.getItems().get(event.getPosition());
         removePosition = event.getPosition();
         quotedApter.getItems().remove(event.getPosition());
         quotedApter.notifyItemRemoved(event.getPosition());
-        ((MainActivity) getActivity()).handleSnackBarMessageEvent(eventSnackBarMessage);
+        ((MainActivity) getActivity()).handleSnackBarMessageEvent(eventSnackbarMessage);
     }
 
     public void networkToast() {
-        BusProvider.getInstance().postOnUIThread(new EventSnackBarMessage(getString(R.string.network_toast), getView()), getActivity());
+        BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage(getString(R.string.network_toast), getView()), getActivity());
     }
 
 

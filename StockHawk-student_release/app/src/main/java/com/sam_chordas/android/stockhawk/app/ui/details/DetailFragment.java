@@ -127,39 +127,42 @@ public class DetailFragment extends Fragment {
     }
 
     private void setData(int count, float range) {
-        ArrayList<String> xVals = new ArrayList<String>();
-        ArrayList<Entry> yVals = new ArrayList<Entry>();
-        for (int i = 0; i < count; i++) {
-            xVals.add(quotes.get(i).getDate());
-            float val = Float.valueOf(quotes.get(i).getClose());
-            yVals.add(new Entry(val, i));
+        if (cBFrgDetail != null) {
+            ArrayList<String> xVals = new ArrayList<String>();
+            ArrayList<Entry> yVals = new ArrayList<Entry>();
+            for (int i = 0; i < count; i++) {
+                xVals.add(quotes.get(i).getDate());
+                float val = Float.valueOf(quotes.get(i).getClose());
+                yVals.add(new Entry(val, i));
+            }
+            LineDataSet set;
+
+            if (cBFrgDetail.getData() != null &&
+                    cBFrgDetail.getData().getDataSetCount() > 0) {
+                set = (LineDataSet) cBFrgDetail.getData().getDataSetByIndex(0);
+                cBFrgDetail.notifyDataSetChanged();
+            } else {
+                set = new LineDataSet(yVals, quote.getName());
+                set.enableDashedLine(10f, 5f, 0f);
+                set.enableDashedHighlightLine(10f, 5f, 0f);
+                set.setColor(R.color.material_blue_700);
+                set.setCircleColor(R.color.material_blue_500);
+                set.setLineWidth(1f);
+                set.setCircleRadius(3f);
+                set.setDrawCircleHole(false);
+                set.setValueTextSize(9f);
+                set.setDrawFilled(true);
+                set.setFillColor(R.color.material_green_700);
+
+
+                ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+                dataSets.add(set);
+                LineData data = new LineData(xVals, dataSets);
+                cBFrgDetail.setData(data);
+                cBFrgDetail.invalidate();
+            }
         }
-        LineDataSet set;
 
-        if (cBFrgDetail.getData() != null &&
-                cBFrgDetail.getData().getDataSetCount() > 0) {
-            set = (LineDataSet) cBFrgDetail.getData().getDataSetByIndex(0);
-            cBFrgDetail.notifyDataSetChanged();
-        } else {
-            set = new LineDataSet(yVals, quote.getName());
-            set.enableDashedLine(10f, 5f, 0f);
-            set.enableDashedHighlightLine(10f, 5f, 0f);
-            set.setColor(R.color.material_blue_700);
-            set.setCircleColor(R.color.material_blue_500);
-            set.setLineWidth(1f);
-            set.setCircleRadius(3f);
-            set.setDrawCircleHole(false);
-            set.setValueTextSize(9f);
-            set.setDrawFilled(true);
-            set.setFillColor(R.color.material_green_700);
-
-
-            ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-            dataSets.add(set);
-            LineData data = new LineData(xVals, dataSets);
-            cBFrgDetail.setData(data);
-            cBFrgDetail.invalidate();
-        }
 
     }
 

@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.sam_chordas.android.stockhawk.R;
-import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessage;
 
 import java.util.ArrayList;
 
@@ -109,7 +109,7 @@ public class BaseActivity extends AppCompatActivity {
         updateActionBarTitle();
     }
 
-    public void handleSnackBarMessageEvent(final EventSnackBarMessage event) {
+    public void handleSnackBarMessageEvent(final EventSnackbarMessage event) {
         this.clearKeyboardFromScreen();
         final Snackbar snackBar = Snackbar.make(event.getView(), event.getText(), Snackbar.LENGTH_LONG);
         if (event.getActionLabelColor() != 0) {

@@ -8,7 +8,7 @@ import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.base.BaseActivity;
-import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackBarMessage;
+import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessage;
 import com.sam_chordas.android.stockhawk.app.ui.home.HomeFragment;
 import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
@@ -21,15 +21,15 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    EventSnackBarMessage eventSnackBarMessage;
+    EventSnackbarMessage eventSnackbarMessage;
     private boolean screamWithToPages;
 
-    public EventSnackBarMessage getEventSnackBarMessage() {
-        return eventSnackBarMessage;
+    public EventSnackbarMessage getEventSnackbarMessage() {
+        return eventSnackbarMessage;
     }
 
-    public void setEventSnackBarMessage(EventSnackBarMessage eventSnackBarMessage) {
-        this.eventSnackBarMessage = eventSnackBarMessage;
+    public void setEventSnackbarMessage(EventSnackbarMessage eventSnackbarMessage) {
+        this.eventSnackbarMessage = eventSnackbarMessage;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
         } else {
             navigateMainContent(HomeFragment.newInstance(), getString(R.string.app_name));
         }
-        eventSnackBarMessage = new EventSnackBarMessage(getWindow().getDecorView().getRootView());
+        eventSnackbarMessage = new EventSnackbarMessage(getWindow().getDecorView().getRootView());
         if (ConnectionUtils.isOnline(this)) {
             long period = 3600L;
             long flex = 1L;
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onSnackbarMessageEvent(EventSnackBarMessage event) {
+    public void onSnackbarMessageEvent(EventSnackbarMessage event) {
         handleSnackBarMessageEvent(event);
     }
 
