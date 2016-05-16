@@ -18,4 +18,6 @@
     <string name="frg_home_undo">undo</string>
     <string name="roboto_light_ttf">fonts/Roboto-Light.ttf</string>
     <string name="frg_details_entry_data">You need to provide data for the chart.</string>
+    <string name="description_add_stock">Add you new quote element.</string>
+    <string name="widget_collection_no_data_set">No data set</string>
 </resources>

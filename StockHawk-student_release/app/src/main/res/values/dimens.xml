@@ -17,4 +17,5 @@
     <dimen name="default_small_size">4dp</dimen>
     <dimen name="radios_cards">4dp</dimen>
     <dimen name="frg_home_height_quote_items">72dp</dimen>
+    <dimen name="padding_item_quote">16dp</dimen>
 </resources>
