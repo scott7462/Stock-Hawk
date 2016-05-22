@@ -45,7 +45,19 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by android4 on 4/8/16.
+ * Copyright (C) 2015 The Android Open Source Project
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 public class HomeFragment extends Fragment {
 
@@ -70,7 +82,7 @@ public class HomeFragment extends Fragment {
                             try {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
-                                    BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage("This stock is already saved!", getView()), getActivity());
+                                    BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage(getString(R.string.frg_homr_stock_saved), getView()), getActivity());
 
                                 } else {
                                     mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.ADD.toString());
@@ -172,9 +184,6 @@ public class HomeFragment extends Fragment {
                 getActivity().onBackPressed();
                 return true;
             }
-            case R.id.action_settings: {
-                return true;
-            }
             case R.id.action_change_units: {
                 // this is for changing stock changes from percent value to dollar value
                 quotedApter.updateShowPercent();
@@ -196,16 +205,17 @@ public class HomeFragment extends Fragment {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else{
-            EventSnackbarMessage eventSnackbarMessage = new EventSnackbarMessage("We cant fid ",getView());
-            ((MainActivity)getActivity()).handleSnackBarMessageEvent(eventSnackbarMessage);
+        } else {
+            EventSnackbarMessage eventSnackbarMessage = new EventSnackbarMessage(getString(R.string.frg_home_can_not_find_stock), getView());
+            ((MainActivity) getActivity()).handleSnackBarMessageEvent(eventSnackbarMessage);
         }
     }
 
     @Subscribe
     public void onSnackbarMessageEvent(EventRemoveItem event) {
         EventSnackbarMessage eventSnackbarMessage =
-                new EventSnackbarMessage("You remove the " + quotedApter.getItems().get(event.getPosition()).getSymbol() + " of your list",
+                new EventSnackbarMessage(
+                        getString(R.string.remove_item, quotedApter.getItems().get(event.getPosition()).getSymbol()),
                         getView());
         eventSnackbarMessage.setOnDetachedToWindowRunnable(
                 new Runnable[]{new Runnable() {
@@ -213,7 +223,7 @@ public class HomeFragment extends Fragment {
                         try {
                             QuoteDaoAdapter.removeQuote(removeQuote);
                             removeQuote = null;
-                            SettingsUtils.setPreferenceRemoveAll(QuoteDaoAdapter.getAllQuote().size()==0);
+                            SettingsUtils.setPreferenceRemoveAll(QuoteDaoAdapter.getAllQuote().size() == 0);
                             WidgetUtils.updateWidget();
                         } catch (SQLException e) {
                             e.printStackTrace();

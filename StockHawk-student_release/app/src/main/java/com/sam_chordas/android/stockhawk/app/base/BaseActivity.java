@@ -17,7 +17,6 @@ import com.sam_chordas.android.stockhawk.app.busevents.events.EventSnackbarMessa
 
 import java.util.ArrayList;
 
-
 /**
  * Copyright (C) 2015 The Android Open Source Project
  * <p/>

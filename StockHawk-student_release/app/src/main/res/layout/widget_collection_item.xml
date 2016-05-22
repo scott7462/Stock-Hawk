@@ -7,33 +7,37 @@
     android:orientation="horizontal"
     android:paddingLeft="@dimen/default_large_size"
     android:paddingRight="@dimen/default_large_size">
+
     <TextView
         android:id="@+id/tVStockSymbol"
         style="@style/StockSymbolTextStyle"
-        android:textSize="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left|center_vertical" />
+        android:gravity="left|center_vertical"
+        android:textSize="18dp" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="right">
+
         <TextView
             android:id="@+id/tVBidPrice"
             style="@style/BidPriceTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
-            android:paddingRight="@dimen/default_medium_size" />
+            android:paddingRight="@dimen/default_medium_size"
+            android:textSize="12dp" />
+
         <TextView
             android:id="@+id/tVChange"
             style="@style/PercentChangeTextStyle"
             android:layout_width="wrap_content"
-            android:textSize="8sp"
             android:layout_height="wrap_content"
             android:background="@drawable/percent_change_pill"
             android:paddingLeft="@dimen/default_small_size"
-            android:paddingRight="@dimen/default_small_size" />
+            android:paddingRight="@dimen/default_small_size"
+            android:textSize="12dp" />
     </LinearLayout>
 </LinearLayout>

@@ -4,7 +4,6 @@ import com.j256.ormlite.dao.Dao;
 import com.sam_chordas.android.stockhawk.app.App;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
 import com.sam_chordas.android.stockhawk.db.provider.Contract;
-import com.sam_chordas.android.stockhawk.widget.WidgetUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,8 +33,7 @@ public class QuoteDaoAdapter {
     public static ArrayList<Quote> getAllQuote() throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
         Dao<Quote, Integer> movieDao = dbHelper.getQuoteDao();
-        ArrayList<Quote> quotes = new ArrayList<Quote>(movieDao.queryForAll());
-        return quotes;
+        return new ArrayList<Quote>(movieDao.queryForAll());
     }
 
     /**

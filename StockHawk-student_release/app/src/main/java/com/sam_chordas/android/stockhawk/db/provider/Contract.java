@@ -7,7 +7,19 @@ import android.provider.BaseColumns;
 import com.sam_chordas.android.stockhawk.db.DBQLiteHelper;
 
 /**
- * Created by scott7462 on 4/17/16.
+ * Copyright (C) 2015 The Android Open Source Project
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 public class Contract {
     public static final String DATABASE_NAME = DBQLiteHelper.DATABASE_EXTERNAL_NAME;
@@ -34,8 +46,8 @@ public class Contract {
 
 
         // content uri pattern code
-        public static final int CONTENT_URI_PATTERN_MANY = 1;
-        public static final int CONTENT_URI_PATTERN_ONE = 2;
+        static final int CONTENT_URI_PATTERN_MANY = 1;
+        static final int CONTENT_URI_PATTERN_ONE = 2;
 
         // Refer to activity.
         public static final Uri contentUri = new Uri.Builder()

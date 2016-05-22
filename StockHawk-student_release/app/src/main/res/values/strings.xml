@@ -20,4 +20,8 @@
     <string name="frg_details_entry_data">You need to provide data for the chart.</string>
     <string name="description_add_stock">Add you new quote element.</string>
     <string name="widget_collection_no_data_set">No data set</string>
+    <string name="frg_homr_stock_saved">This stock is already saved!</string>
+    <string name="frg_home_can_not_find_stock">We can\'t find the stock try other.</string>
+    <string name="remove_item">You remove the %1$s of your list</string>
+    <string name="content_description_change_units">Change uinits in list</string>
 </resources>
