@@ -142,6 +142,7 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
         if (event.isCentered()) {
+            assert tv != null;
             tv.setGravity(1);
         }
 

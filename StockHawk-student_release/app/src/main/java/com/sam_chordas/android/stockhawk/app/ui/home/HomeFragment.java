@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
                             try {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
-                                    BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage(getString(R.string.frg_homr_stock_saved), getView()), getActivity());
+                                    BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage(getString(R.string.frg_home_stock_saved), getView()), getActivity());
 
                                 } else {
                                     mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.ADD.toString());

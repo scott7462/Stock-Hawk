@@ -1,27 +1,22 @@
 <resources>
     <string name="app_name">Stock Hawk</string>
-
     <string name="action_example">Example action</string>
-
     <string name="action_settings">Settings</string>
     <string name="action_change_units">Change Units</string>
     <string name="symbol_search">Symbol Search</string>
     <string name="content_test">Search for a Stock Symbol</string>
-    <string name="input_hint">FB</string>
+    <string name="input_hint" translatable="false">FB</string>
+    <string name="roboto_light_ttf" translatable="false">fonts/Roboto-Light.ttf</string>
     <string name="input_prefill"></string>
     <string name="widget_title">Today\'s Market</string>
     <string name="network_toast">Uh-oh! This app requires an internet connection</string>
-    <string name="query">select * from yahoo.finance.quotes where symbol in (</string>
-    <string name="query_value">\"%1$s\",</string>
-    <string name="query_value_end">\"%1$s\" )</string>
     <string name="base_activity_snack_bar_missing_id_error">Error</string>
     <string name="frg_home_undo">undo</string>
-    <string name="roboto_light_ttf">fonts/Roboto-Light.ttf</string>
     <string name="frg_details_entry_data">You need to provide data for the chart.</string>
     <string name="description_add_stock">Add you new quote element.</string>
     <string name="widget_collection_no_data_set">No data set</string>
-    <string name="frg_homr_stock_saved">This stock is already saved!</string>
+    <string name="frg_home_stock_saved">This stock is already saved!</string>
     <string name="frg_home_can_not_find_stock">We can\'t find the stock try other.</string>
     <string name="remove_item">You remove the %1$s of your list</string>
-    <string name="content_description_change_units">Change uinits in list</string>
+    <string name="content_description_change_units">Change units in list</string>
 </resources>
