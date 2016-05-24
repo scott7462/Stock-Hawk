@@ -13,28 +13,29 @@
         android:layout_height="@dimen/frg_home_height_quote_items"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_item_quote"
-        android:paddingRight="@dimen/padding_item_quote">
+        android:paddingStart="@dimen/padding_item_quote"
+        android:paddingEnd="@dimen/padding_item_quote">
 
         <TextView
             android:id="@+id/tVStockSymbol"
             style="@style/StockSymbolTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left|center_vertical" />
+            android:gravity="start|center_vertical" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right">
+            android:gravity="end">
 
             <TextView
                 android:id="@+id/tVBidPrice"
                 style="@style/BidPriceTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="@dimen/default_medium_size" />
+                android:paddingStart="@dimen/default_medium_size"
+                android:paddingEnd="@dimen/default_medium_size" />
 
             <TextView
                 android:id="@+id/tVChange"
@@ -42,8 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/percent_change_pill"
-                android:paddingLeft="@dimen/default_small_size"
-                android:paddingRight="@dimen/default_small_size" />
+                android:paddingStart="@dimen/default_small_size"
+                android:paddingEnd="@dimen/default_small_size" />
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

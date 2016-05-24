@@ -17,7 +17,7 @@
         android:id="@+id/listViewWidget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="@dimen/margin_widget_list_view" />
 
     <TextView
         android:id="@+id/empty_view"

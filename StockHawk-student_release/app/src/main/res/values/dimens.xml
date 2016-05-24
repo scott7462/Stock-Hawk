@@ -18,4 +18,7 @@
     <dimen name="radios_cards">4dp</dimen>
     <dimen name="frg_home_height_quote_items">72dp</dimen>
     <dimen name="padding_item_quote">16dp</dimen>
+    <dimen name="margin_widget_list_view">45dp</dimen>
+    <dimen name="widget_price_item">12dp</dimen>
+    <dimen name="widget_symbol_item">18dp</dimen>
 </resources>
