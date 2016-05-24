@@ -28,7 +28,7 @@ import java.util.List;
 public class QuoteDaoAdapter {
 
     /**
-     * Get get all movies
+     * Get get all quotes
      */
     public static ArrayList<Quote> getAllQuote() throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
@@ -37,7 +37,7 @@ public class QuoteDaoAdapter {
     }
 
     /**
-     * insert movie
+     * insert quote
      */
     public static int insertQuote(Quote quote) throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
@@ -46,7 +46,7 @@ public class QuoteDaoAdapter {
     }
 
     /**
-     * remove q
+     * remove quote
      */
     public static int removeQuote(Quote quote) throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
@@ -55,7 +55,7 @@ public class QuoteDaoAdapter {
     }
 
     /**
-     * remove q
+     * remove quote
      */
     public static void updatePositions(ArrayList<Quote> quotes) throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();
@@ -67,7 +67,7 @@ public class QuoteDaoAdapter {
     }
 
     /**
-     * validate if the movie is in the database
+     * validate if the quote is in the database
      */
     public static boolean isQuote(String symbol) throws SQLException {
         DBQLiteHelper dbHelper = App.getDBExternalHelper();

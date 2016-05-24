@@ -28,7 +28,7 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.Response;
@@ -53,9 +53,9 @@ import timber.log.Timber;
 public class DetailFragment extends Fragment {
 
     private static final String TAG = DetailFragment.class.getSimpleName();
-    @Bind(R.id.cBFrgDetail)
+    @BindView(R.id.cBFrgDetail)
     LineChart cBFrgDetail;
-    @Bind(R.id.eLFrgDetailsLoading)
+    @BindView(R.id.eLFrgDetailsLoading)
     RelativeLayout eLFrgDetailsLoading;
 
     private Quote quote;
@@ -191,9 +191,4 @@ public class DetailFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 }

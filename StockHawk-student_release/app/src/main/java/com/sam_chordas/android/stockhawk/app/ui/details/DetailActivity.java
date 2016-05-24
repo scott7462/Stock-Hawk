@@ -9,7 +9,7 @@ import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.app.base.BaseActivity;
 import com.sam_chordas.android.stockhawk.app.model.Quote;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -29,11 +29,11 @@ import butterknife.ButterKnife;
  */
 public class DetailActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     /**
-     * Create a new Instance of the activity with the movie form data.
+     * Create a new Instance of the activity with the quote form data.
      */
     public static void newInstance(Activity activity, Quote quote) {
         Intent intent = new Intent(activity, DetailActivity.class);

@@ -40,7 +40,7 @@ import com.squareup.otto.Subscribe;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
     private Quote removeQuote;
     private int removePosition;
 
-    @Bind(R.id.rVHome)
+    @BindView(R.id.rVHome)
     RecyclerView rVHome;
 
     @OnClick(R.id.fab)
@@ -83,7 +83,6 @@ public class HomeFragment extends Fragment {
                                 boolean quote = QuoteDaoAdapter.isQuote(input.toString());
                                 if (quote) {
                                     BusProvider.getInstance().postOnUIThread(new EventSnackbarMessage(getString(R.string.frg_home_stock_saved), getView()), getActivity());
-
                                 } else {
                                     mServiceIntent.putExtra(StockTaskService.CALLS.TAG.toString(), StockTaskService.CALLS.ADD.toString());
                                     mServiceIntent.putExtra(Contract.Quote.SYMBOL, input.toString());

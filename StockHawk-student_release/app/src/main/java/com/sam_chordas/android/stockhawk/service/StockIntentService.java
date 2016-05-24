@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.gcm.TaskParams;
-import com.sam_chordas.android.stockhawk.app.model.Quote;
+import com.sam_chordas.android.stockhawk.db.provider.Contract;
 
 import timber.log.Timber;
 
@@ -40,7 +40,7 @@ public class StockIntentService extends IntentService {
         StockTaskService stockTaskService = new StockTaskService();
         Bundle args = new Bundle();
         if (intent.getStringExtra(StockTaskService.CALLS.TAG.toString()).equals(StockTaskService.CALLS.ADD.toString())) {
-            args.putString(Quote.SYMBOL, intent.getStringExtra(Quote.SYMBOL));
+            args.putString(Contract.Quote.SYMBOL, intent.getStringExtra(Contract.Quote.SYMBOL));
         }
         stockTaskService.onRunTask(new TaskParams(intent.getStringExtra(StockTaskService.CALLS.TAG.toString()), args));
     }

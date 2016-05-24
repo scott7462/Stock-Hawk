@@ -14,7 +14,7 @@ import com.sam_chordas.android.stockhawk.app.utils.ConnectionUtils;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
 import com.squareup.otto.Subscribe;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  */
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     EventSnackbarMessage eventSnackbarMessage;
     private boolean screamWithToPages;

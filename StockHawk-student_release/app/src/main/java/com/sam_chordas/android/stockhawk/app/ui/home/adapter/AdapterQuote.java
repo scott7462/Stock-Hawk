@@ -26,7 +26,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
@@ -161,11 +161,11 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tVStockSymbol)
+        @BindView(R.id.tVStockSymbol)
         TextView tVStockSymbol;
-        @Bind(R.id.tVBidPrice)
+        @BindView(R.id.tVBidPrice)
         TextView tVBidPrice;
-        @Bind(R.id.tVChange)
+        @BindView(R.id.tVChange)
         TextView tVChange;
 
 

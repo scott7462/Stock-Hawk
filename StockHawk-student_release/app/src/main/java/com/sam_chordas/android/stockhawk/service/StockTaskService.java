@@ -12,6 +12,7 @@ import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuote;
 import com.sam_chordas.android.stockhawk.app.retofit.Response.ResponseQuotes;
 import com.sam_chordas.android.stockhawk.app.utils.SettingsUtils;
 import com.sam_chordas.android.stockhawk.db.QuoteDaoAdapter;
+import com.sam_chordas.android.stockhawk.db.provider.Contract;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -115,7 +116,7 @@ public class StockTaskService extends GcmTaskService {
                 stockInput = quotes.get(0).getSymbol();
             } else {
 
-                stockInput = params.getExtras().getString(Quote.SYMBOL);
+                stockInput = params.getExtras().getString(Contract.Quote.SYMBOL);
             }
             urlStringBuilder.append("\"").append(stockInput).append("\")");
 
