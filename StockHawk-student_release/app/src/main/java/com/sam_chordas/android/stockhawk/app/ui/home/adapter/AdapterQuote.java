@@ -168,24 +168,23 @@ public class AdapterQuote extends RecyclerView.Adapter<AdapterQuote.ViewHolder> 
         @BindView(R.id.tVChange)
         TextView tVChange;
 
-
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
             tVStockSymbol.setTypeface(Typeface.createFromAsset(v.getContext().getAssets(),
                     v.getContext().getString(R.string.roboto_light_ttf)));
 
-            v.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Quote quote = getItems().get(getAdapterPosition());
-                    if (v.getContext() instanceof MainActivity
-                            && ((MainActivity) v.getContext()).isScreamWithToPages()) {
-                        ((BaseActivity) v.getContext()).navigateDetailContent(
+                    if (itemView.getContext() instanceof MainActivity
+                            && ((MainActivity) itemView.getContext()).isScreamWithToPages()) {
+                        ((BaseActivity) itemView.getContext()).navigateDetailContent(
                                 DetailFragment.newInstance(quote),
                                 v.getContext().getString(R.string.app_name), R.id.container_detail);
                     } else {
-                        DetailActivity.newInstance((Activity) v.getContext(), quote);
+                        DetailActivity.newInstance((Activity) itemView.getContext(), quote);
                     }
 
                 }
