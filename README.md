@@ -1,6 +1,6 @@
 # Stock Hawk App
 
-The idea of Stock Hawk App is to diagnostic problems in a production app and give this app the capability to be accessible for all users and the ability to support all kind of languages. Another important feature to  Stock Hawk App is the creation of Widget for android home screen. 
+The idea of Stock Hawk App is to diagnostic problems in a production app and give this app the capability to be accessible for all users and the ability to support all kind of languages. Another important feature to  Stock Hawk App is the creation of Widget for the android home screen. 
 
 ## What Will I Learn?
 
